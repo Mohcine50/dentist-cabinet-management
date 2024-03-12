@@ -1,5 +1,5 @@
 :host {
-  @apply pb-3 px-3 text-white bg-main-blue max-w-[300px] flex flex-col;
+  @apply pb-3 px-3 text-white bg-main-blue max-w-[300px] min-w-[280px] flex flex-col;
   .sidebar-links {
     @apply flex gap-1 flex-col grow text-[0.9rem] mt-2 font-normal;
 

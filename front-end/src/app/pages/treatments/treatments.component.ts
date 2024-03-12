@@ -4,12 +4,18 @@ import { AddTreatmentComponent } from './addTreatment/add-treatment.component';
 import { RightSliderComponent } from '../../shared/components/rightSlider/rightSlider.component';
 import { TreatmentsStore } from '../../stores/treatments/treatments.store';
 import { getState } from '@ngrx/signals';
+import { TreatmentComponent } from './treatment/treatment.component';
 
 @Component({
   selector: 'dem-treatments',
   providers: [TreatmentsStore],
   standalone: true,
-  imports: [CommonModule, AddTreatmentComponent, RightSliderComponent],
+  imports: [
+    CommonModule,
+    AddTreatmentComponent,
+    RightSliderComponent,
+    TreatmentComponent,
+  ],
   templateUrl: './treatments.component.html',
   styleUrl: './treatments.component.scss',
 })

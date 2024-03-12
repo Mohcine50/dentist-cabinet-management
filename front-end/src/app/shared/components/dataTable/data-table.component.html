@@ -4,7 +4,7 @@
     @for (header of tableHeader; let i = $index; track i) {
       <th class="">{{ header }}</th>
     }
-    <th></th>
+    <th class="!max-w-10"></th>
   </tr>
   </thead>
   <tbody>
@@ -14,9 +14,14 @@
           @for (header of tableHeader; let i = $index; track i) {
             <td>{{ item[header] }}</td>
           }
-          <td class="!text-main-blue text-end font-medium cursor-pointer"
-              (click)="onEditEventClick(item)">Edit
+          <td class="flex gap-4 items-center justify-end">
+            <span (click)="onEditEventClick(item)"
+                  class="!text-main-green  font-medium cursor-pointer inline-block">View</span>
+            <span (click)="onEditEventClick(item)"
+                  class="!text-main-blue  font-medium cursor-pointer inline-block">Edit</span>
           </td>
+
+
         </tr>
       }
     }
