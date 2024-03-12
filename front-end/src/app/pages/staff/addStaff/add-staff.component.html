@@ -1,0 +1,29 @@
+<form (ngSubmit)="addStaffForm($event)" [formGroup]="staffForm" class="flex flex-col gap-3">
+  <input [formControl]="fullName" class="dem-input" name="fullName" placeholder="Full Name" type="text" />
+  <textarea [formControl]="bio" class="dem-input min-h-12" name="bio" placeholder="bio"
+            type="text"></textarea>
+  <input [formControl]="email" class="dem-input" name="email" placeholder="E-mail" type="email" />
+  <input [formControl]="phoneNumber" class="dem-input" name="phoneNumber" placeholder="Phone Number" type="tel" />
+  <input [formControl]="otherPhoneNumber" class="dem-input" name="otherPhoneNumber" placeholder="Other Phone Number"
+         type="tel" />
+  <input [formControl]="address" class="dem-input" name="address" placeholder="Address" type="text" />
+  <input [formControl]="cinNumber" class="dem-input" name="cinNumber" placeholder="Cin Number" type="text" />
+  <input [formControl]="city" class="dem-input" name="city" placeholder="City" type="text" />
+  <dem-single-select-input
+    [formControl]="gender"
+    [options]="['Male', 'Female']"
+    title="Gender"
+  />
+  <dem-multi-select-input
+    [formControl]="roles"
+    [options]="rolesList"
+    label="name"
+    title="Select Roles"
+  />
+
+
+  <div class="flex items-center justify-end gap-3 mt-5">
+    <button (click)="addStaffForm($event)" class="dem-btn dem-btn-trp" type="reset">Cancel</button>
+    <button class="dem-btn" type="submit">Add staff</button>
+  </div>
+</form>

@@ -1,0 +1,25 @@
+<table>
+  <thead>
+  <tr>
+    @for (header of tableHeader; let i = $index; track i) {
+      <th class="">{{ header }}</th>
+    }
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+    @if (tableData) {
+      @for (item of tableData; let i = $index; track i) {
+        <tr>
+          @for (header of tableHeader; let i = $index; track i) {
+            <td>{{ item[header] }}</td>
+          }
+          <td class="!text-main-blue text-end font-medium cursor-pointer"
+              (click)="onEditEventClick(item)">Edit
+          </td>
+        </tr>
+      }
+    }
+
+  </tbody>
+</table>

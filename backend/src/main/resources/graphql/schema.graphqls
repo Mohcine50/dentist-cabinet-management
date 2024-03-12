@@ -1,0 +1,22 @@
+type Query {
+    """ AUTH """
+    login (username: String!, password: String!): LoginResponse,
+    """ ROLES """
+    loadAllRoles: [Role]!
+
+    """TREATMENTS"""
+    loadAllTreatments:[Treatment]
+    getTreatmentById(id: String!): Treatment
+}
+
+type Mutation {
+
+    addStaffMember(registerAuthManager: RegisterAuthManager!): User
+
+    """TREATMENTS"""
+    deleteTreatment(id: String!): String!
+    updateTreatment(id: String!): Treatment
+    addTreatment(treatmentData: TreatmentInput!): Treatment
+}
+
+

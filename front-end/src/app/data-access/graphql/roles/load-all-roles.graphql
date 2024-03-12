@@ -1,0 +1,6 @@
+query loadAllRoles {
+  loadAllRoles {
+    id
+    name
+  }
+}

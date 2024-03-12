@@ -1,0 +1,22 @@
+<form (ngSubmit)="addPatientForm($event)" [formGroup]="patientForm" class="flex flex-col gap-3">
+  <input [formControl]="fullName" class="dem-input" name="fullName" placeholder="Patient Full Name" type="text" />
+  <textarea [contentEditable]="true" [formControl]="bio" class="dem-input min-h-12" name="Bio" placeholder="Bio"
+            type="text"></textarea>
+  <input [formControl]="phoneNumber" class="dem-input" name="phoneNumber" placeholder="Phone Number" type="tel" />
+  <input [formControl]="otherPhoneNumber" class="dem-input" name="otherPhoneNumber" placeholder="Other Phone Number"
+         type="tel" />
+  <input [formControl]="address" class="dem-input" name="address" placeholder="Living Address" type="text" />
+  <input [formControl]="city" class="dem-input" name="city" placeholder="City" type="text" />
+  <input [formControl]="cinNumber" class="dem-input" name="cinNumber" placeholder="CIN Number" type="text" />
+  <input [formControl]="treatment" class="dem-input" name="treatment" placeholder="Treatment type" type="text" />
+  <dem-single-select-input
+    [formControl]="gender"
+    [options]="['Male', 'Female']"
+    title="Gender"
+  />
+
+  <div class="flex items-center justify-end gap-3 mt-5">
+    <button class="dem-btn dem-btn-trp" type="reset">Cancel</button>
+    <button class="dem-btn" type="submit">Add Patient</button>
+  </div>
+</form>

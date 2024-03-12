@@ -1,0 +1,21 @@
+mutation addTreatment($name: String!, $price: Int!, $duration: String!, $sessions: Int){
+    addTreatment(treatmentData: {
+        sessions: $sessions,
+        name:$name,
+        price:$price,
+        duration:$duration
+    }){
+        name
+        id
+        price
+        sessions
+        createdAt
+        updatedAt
+        createdBy{
+            username
+        }
+        updatedBy{
+            username
+        }
+    }
+}

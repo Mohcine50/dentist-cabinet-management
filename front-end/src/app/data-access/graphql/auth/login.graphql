@@ -1,0 +1,6 @@
+query login($password: String!, $username: String!) {
+  login(password: $password, username: $username) {
+    accessToken
+    message
+  }
+}

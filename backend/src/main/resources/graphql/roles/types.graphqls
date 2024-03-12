@@ -1,0 +1,4 @@
+type Role{
+    id:String,
+    name: String
+}

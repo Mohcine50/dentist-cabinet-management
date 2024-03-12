@@ -1,0 +1,24 @@
+<div (blur)="onBlur($event)" (focus)="onFocused($event)" [class.bg-slate-400]="disabled" class="dem-input relative"
+     tabindex="0">
+  <div (click)="toggleDropdown()" class="cursor-pointer flex items-center">
+    @if (selectedValue) {
+      <span>{{ selectedValue }}</span>
+    } @else {
+      <span>{{ title }}</span>
+    }
+  </div>
+  @if (isOpen) {
+    <ul
+      class="mb-2 bottom-full absolute bg-white left-0 right-0 ring-1 ring-gray-100 rounded-md border-collapse max-h-[140px] overflow-y-scroll shadow-md">
+      @for (option of options; track option) {
+        <li (click)="onOptionClick(label ? option[label] : option)"
+            [class.bg-gray-100]="isSelected(label ? option[label] : option)"
+            class="hover:bg-gray-100 cursor-pointer py-2 px-1.5 ring-1 ring-gray-100 text-sm">
+      <span>
+        {{ (label ? splitByHyphen(option[label]) : option) | titlecase }}
+      </span>
+        </li>
+      }
+    </ul>
+  }
+</div>

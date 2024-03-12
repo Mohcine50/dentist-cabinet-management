@@ -1,0 +1,14 @@
+<div class="flex items-center justify-between">
+  <h2 class="text-base">Staff Members</h2>
+  <button (click)="addStaffForm()" class="dem-btn">Add Staff</button>
+</div>
+
+<div class="">
+  <dem-data-table (editEvent)="editStaff($event)" [tableData]="staffStore.staff()"
+                  [tableHeader]="staffDataTableHeader" />
+</div>
+
+
+<dem-right-slider #rightSliderComponent title="Add Staff">
+  <dem-add-staff (event)="addStaffForm()" />
+</dem-right-slider>

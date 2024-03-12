@@ -1,0 +1,16 @@
+query loadAllTreatments{
+    loadAllTreatments{
+        name
+        id
+        price
+        sessions
+        updatedAt
+        createdAt
+        createdBy{
+            username
+        }
+        updatedBy{
+            username
+        }
+    }
+}

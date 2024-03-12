@@ -1,0 +1,6 @@
+input TreatmentInput {
+    name: String,
+    duration: String,
+    price: Int,
+    sessions: Int,
+}

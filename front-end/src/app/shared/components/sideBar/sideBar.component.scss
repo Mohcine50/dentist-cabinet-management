@@ -1,0 +1,29 @@
+:host {
+  @apply pb-3 px-3 text-white bg-main-blue max-w-[300px] flex flex-col;
+  .sidebar-links {
+    @apply flex gap-1 flex-col grow text-[0.9rem] mt-2 font-normal;
+
+    &__item {
+      @apply rounded-md overflow-hidden;
+
+      a {
+        @apply flex items-center gap-3 p-2;
+      }
+
+      &:hover {
+        @apply bg-main-green;
+      }
+
+      &:last-of-type {
+        @apply mt-auto;
+      }
+
+      .active-link {
+        @apply bg-main-green;
+      }
+
+
+    }
+
+  }
+}

@@ -1,0 +1,14 @@
+<div class="flex items-center justify-between">
+  <h2 class="text-base">Patients List</h2>
+  <button (click)="addPatientForm()" class="dem-btn">Add Patient</button>
+</div>
+
+<div>
+  @for (patient of patientStore.patients(); track patient) {
+    <div>{{ patient.name }}</div>
+  }
+</div>
+
+<dem-right-slider #rightSliderComponent title="Add Patient">
+  <dem-add-patient (event)="addPatientForm()" />
+</dem-right-slider>

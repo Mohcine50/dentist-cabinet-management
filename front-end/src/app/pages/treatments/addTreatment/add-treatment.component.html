@@ -1,0 +1,11 @@
+<form (ngSubmit)="addTreatmentForm($event)" [formGroup]="treatmentForm" class="flex flex-col gap-3">
+  <input [formControl]="name" class="dem-input" name="name" placeholder="Name" type="text" />
+  <input [formControl]="price" class="dem-input" name="price" placeholder="Price"
+         type="text" />
+  <input [formControl]="duration" class="dem-input" name="duration" placeholder="duration" type="text" />
+  <input [formControl]="sessions" class="dem-input" min="1" name="sessions" placeholder="Sessions" type="number" />
+  <div class="flex items-center justify-end gap-3 mt-5">
+    <button class="dem-btn dem-btn-trp" type="reset">Cancel</button>
+    <button class="dem-btn" type="submit">Add Treatment</button>
+  </div>
+</form>

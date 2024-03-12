@@ -1,0 +1,15 @@
+type Profile{
+    id: String,
+    fullName: String,
+    cin: Int,
+    bio: Int,
+    city: String,
+    gender: String,
+    phoneNumber: String,
+    otherPhoneNumber: String,
+    updatedAt: String,
+    createdAt: User,
+    updatedBy: User,
+    user: User
+}
+

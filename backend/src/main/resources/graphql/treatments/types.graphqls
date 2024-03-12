@@ -1,0 +1,10 @@
+type Treatment{
+    id: String,
+    name: String,
+    price: Int,
+    sessions: Int,
+    createdAt: String,
+    updatedAt: String,
+    createdBy: User,
+    updatedBy: User,
+}

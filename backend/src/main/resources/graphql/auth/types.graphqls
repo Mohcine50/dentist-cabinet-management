@@ -1,0 +1,5 @@
+type LoginResponse {
+    message: String,
+    accessToken: String
+}
+

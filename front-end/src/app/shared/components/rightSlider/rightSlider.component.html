@@ -1,0 +1,25 @@
+<div aria-labelledby="slide-over-title" aria-modal="true" class="relative z-10" role="dialog">
+  @if (isSlideOver) {
+
+    <div @slideOver class="fixed inset-0 overflow-hidden">
+      <div class="absolute inset-0 overflow-hidden">
+
+        <div (click)="toggleSlideOver()" class="fixed inset-0"></div>
+
+        <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+          <div @slideOver class="pointer-events-auto relative w-screen max-w-md">
+            <div class="flex h-full flex-col overflow-y-scroll bg-white pb-6 shadow-md ">
+              <div class="px-4 sm:px-6 min-h-16 h-16  bg-gray-50 flex items-center">
+                <h2 class="align-middle inline text-base font-normal text-gray-900"
+                    id="slide-over-title">{{ title }}</h2>
+              </div>
+              <div class="relative mt-6 flex-1 px-4 sm:px-6">
+                <ng-content></ng-content>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

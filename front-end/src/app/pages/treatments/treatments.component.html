@@ -1,0 +1,18 @@
+<div class="flex items-center justify-between">
+  <h2 class="text-base">Treatments List</h2>
+  <button (click)="addTreatmentForm()" class="dem-btn">Add Treatment</button>
+</div>
+
+<div>
+
+  @for (treatment of treatmentsStore.treatments(); track treatment) {
+    <h1>
+      {{ treatment.name }}
+    </h1>
+  }
+
+</div>
+
+<dem-right-slider #rightSliderComponent title="Add Treatment">
+  <dem-add-treatment (event)="addTreatmentForm()" />
+</dem-right-slider>
