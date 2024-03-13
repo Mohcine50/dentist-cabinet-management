@@ -35,9 +35,15 @@ export class MultiSelectInputComponent
 
   disabled = false;
   isOpen = false;
-  protected selectedValues!: string[];
+  selectedValues: string[] = [];
 
   constructor(private element: ElementRef, private rendrer: Renderer2) {}
+
+  onChange: any = () => {};
+
+  unListen: any = () => {};
+
+  onTouched: any = () => {};
 
   ngOnInit(): void {}
 
@@ -51,12 +57,7 @@ export class MultiSelectInputComponent
     });
   }
 
-  onChange: any = () => {};
-  unListen: any = () => {};
-
-  onTouched: any = () => {};
-
-  writeValue(value: any): void {
+  writeValue(value: string[]): void {
     this.selectedValues = value;
   }
 
@@ -82,19 +83,25 @@ export class MultiSelectInputComponent
     this.isOpen = !this.isOpen;
   }
 
-  onOptionClick(value: string) {
+  onOptionClick(value: string, event: Event) {
+    event.stopPropagation();
     const index = this.selectedValues.indexOf(value);
     if (index !== -1) {
       this.selectedValues.splice(index, 1);
     } else {
-      this.selectedValues.push(value);
+      this.selectedValues = [...this.selectedValues, value];
     }
     this.onChange(this.selectedValues);
   }
 
-  findValueIndex(id: string) {
-    const index = this.options.indexOf(id);
-    return index;
+  findValueFromIndex(id: string) {
+    const option = this.options.find((option) => option['id'] === id);
+    const index = this.options.indexOf(option);
+    if (index !== -1) {
+      const option = this.options[index];
+      return option[this.label!];
+    }
+    return null;
   }
 
   splitByHyphen(name: string | null | undefined) {

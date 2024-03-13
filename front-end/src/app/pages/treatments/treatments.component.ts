@@ -31,7 +31,7 @@ export class TreatmentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.treatmentsStore.loadAll();
+    //this.treatmentsStore.loadAll();
   }
 
   addTreatmentForm() {

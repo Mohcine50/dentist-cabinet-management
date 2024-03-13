@@ -15,6 +15,7 @@ import {
 } from '@angular/forms';
 import { SingleSelectInputComponent } from '../../../shared/components/singleSelectInput/single-select-input.component';
 import { PatientsStore } from '../../../stores/patients/patients.store';
+import { TreatmentsStore } from '../../../stores/treatments/treatments.store';
 
 @Component({
   selector: 'dem-add-patient',
@@ -26,6 +27,7 @@ import { PatientsStore } from '../../../stores/patients/patients.store';
 export class AddPatientComponent implements OnInit {
   @Output() event = new EventEmitter<void>();
   protected patientStore = inject(PatientsStore);
+  protected treatmentStore = inject(TreatmentsStore);
   protected patientForm!: FormGroup;
   protected fullName = new FormControl('', [Validators.required]);
   protected bio = new FormControl('', [Validators.required]);

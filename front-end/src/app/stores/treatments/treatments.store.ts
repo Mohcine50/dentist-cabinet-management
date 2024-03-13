@@ -1,4 +1,10 @@
-import { signalStore, withMethods, withState, patchState } from '@ngrx/signals';
+import {
+  signalStore,
+  withMethods,
+  withState,
+  patchState,
+  withHooks,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { withAddTreatment } from './features/add-treatment.feature';
 import { withLoadAllTreatments } from './features/load-all-treatments.feature';
@@ -20,7 +26,14 @@ const initialState: TreatmentsState = {
 
 export const TreatmentsStore = signalStore(
   { providedIn: 'root' },
-  withLoadAllTreatments(),
+  //withLoadAllTreatments(),
   withAddTreatment(),
+  withHooks({
+    onInit(store, treatmentService = inject(TreatmentsService)) {
+      treatmentService.loadAllTreatments().subscribe((treatments) => {
+        patchState(store, { treatments });
+      });
+    },
+  }),
   withState(initialState)
 );

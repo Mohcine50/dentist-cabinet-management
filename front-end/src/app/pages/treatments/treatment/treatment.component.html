@@ -1,13 +1,36 @@
-<div class="flex justify-between">
-  <h3>{{ treatment.name }}</h3>
-  <h3 class="text-end">230 DH</h3>
-</div>
+<div class="p-4 flex flex-col gap-4">
+  <div class="flex justify-between">
+    <h3>{{ treatment.name }}</h3>
+    <h3 class="text-end">230 DH</h3>
+  </div>
 
-<div class="flex justify-between">
-  <h3 class="inline-block">Created By: <span>{{ treatment.createdBy.username }}</span></h3>
-  <h3 class="text-end inline-block">Updated By: <span>{{ treatment.createdBy.username }}</span></h3>
+  <div class="flex justify-between">
+    <div class="flex flex-col">
+      <h2 class="text-end inline-block">Updated By: </h2>
+      <h3
+        *ngIf="treatment.createdBy">{{ treatment.createdBy.username }}</h3>
+    </div>
+    <div class="flex flex-col"><h2 class="text-end inline-block">Updated By: </h2>
+      <h3
+        *ngIf="treatment.updatedBy">{{ treatment.updatedBy.username }}</h3>
+    </div>
+
+  </div>
+  <div class="flex justify-between">
+    <div class="flex flex-col">
+      <h2 class="text-end inline-block">Created At: </h2>
+      <h3
+        *ngIf="treatment.createdAt">{{ treatment.createdAt }}</h3>
+    </div>
+    <div class="flex flex-col">
+      <h2 class="text-end inline-block">Updated AT: </h2>
+      <h3
+        *ngIf="treatment.updatedAt">{{ treatment.updatedAt }}</h3>
+    </div>
+  </div>
 </div>
-<div class="flex justify-between">
-  <h3 class="inline-block">Created At: <span>{{ treatment.createdAt | date: 'mm-dd-yyy' }}</span></h3>
-  <h3 class="text-end inline-block">Updated At: <span>{{ treatment.createdAt | date: 'mm-dd-yyy' }}</span></h3>
+<div class="w-full flex items-center justify-evenly">
+  <button class="dem-btn flex-1 !bg-green-400 !rounded-none">More Details</button>
+  <button class="dem-btn flex-1 !bg-red-400 !rounded-none">Edit</button>
+
 </div>

@@ -8,7 +8,12 @@
   <input [formControl]="address" class="dem-input" name="address" placeholder="Living Address" type="text" />
   <input [formControl]="city" class="dem-input" name="city" placeholder="City" type="text" />
   <input [formControl]="cinNumber" class="dem-input" name="cinNumber" placeholder="CIN Number" type="text" />
-  <input [formControl]="treatment" class="dem-input" name="treatment" placeholder="Treatment type" type="text" />
+  <dem-single-select-input
+    [formControl]="gender"
+    [options]="treatmentStore.treatments()"
+    label="name"
+    title="Treatment"
+  />
   <dem-single-select-input
     [formControl]="gender"
     [options]="['Male', 'Female']"
