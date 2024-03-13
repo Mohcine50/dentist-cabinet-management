@@ -47,6 +47,8 @@ public class Profile {
     @Column(nullable = false, name = "other_phone_number")
     private String otherPhoneNumber;
 
+    @Column(nullable = false, name = "email")
+    private String email;
 
 
 }

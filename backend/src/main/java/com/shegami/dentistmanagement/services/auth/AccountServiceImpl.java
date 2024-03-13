@@ -42,7 +42,6 @@ public class AccountServiceImpl implements AccountService {
         AppUser newUser = AppUser.builder()
                 .username(appUser.getUsername())
                 .password(passwordEncoder.encode(appUser.getPassword()))
-                .email(appUser.getEmail())
                 .roles(List.of(role))
                 .build();
 

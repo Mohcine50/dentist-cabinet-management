@@ -26,8 +26,6 @@ public class AppUser {
     @Column(nullable = false)
     private String username;
 
-    @Column(nullable = false)
-    private String email;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
@@ -39,6 +37,8 @@ public class AppUser {
     @OneToOne()
     private Profile profile;
 
+    @Column(nullable = true)
+    private boolean firstLoginTime;
 
 
 }
