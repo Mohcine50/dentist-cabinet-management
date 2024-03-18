@@ -12,5 +12,5 @@ import java.util.List;
 public interface RoleRepository extends JpaRepository<Role, String> {
 
     Role findByName(RoleEnum name);
-
+    Role findRoleById(String id);
 }

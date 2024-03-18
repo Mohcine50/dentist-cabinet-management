@@ -1,6 +1,6 @@
 <div class="h-16 flex items-center">
   <h1 class="text-white font-bold uppercase text-center text-2xl">
-    DC <span class="text-main-green">Management</span>
+    DC <span [class.hidden]="collapsed" class="text-main-green">Management</span>
   </h1>
 </div>
 <ul class="sidebar-links">
@@ -13,7 +13,7 @@
           stroke-linecap="round"
           stroke-linejoin="round" />
       </svg>
-      <span>Dashboard</span>
+      <span [class.hidden]="collapsed">Dashboard</span>
     </a></li>
   <li class="sidebar-links__item">
     <a [routerLinkActive]="['active-link']" [routerLink]="['patients-management']" class="flex items-center">
@@ -25,7 +25,7 @@
           stroke-linejoin="round" />
       </svg>
 
-      <span>Patient Management</span></a>
+      <span [class.hidden]="collapsed">Patient Management</span></a>
   </li>
   <li class="sidebar-links__item">
     <a [routerLinkActive]="['active-link']" [routerLink]="['appointments-management']" class="flex items-center">
@@ -37,7 +37,7 @@
           stroke-linejoin="round" />
       </svg>
 
-      <span>Appointment Management</span></a>
+      <span [class.hidden]="collapsed">Appointment Management</span></a>
   </li>
   <li class="sidebar-links__item"><a [routerLinkActive]="['active-link']" [routerLink]="['invoicing']"
                                      class="flex items-center">
@@ -49,7 +49,7 @@
         stroke-linejoin="round" />
     </svg>
 
-    <span>Invoicing</span></a></li>
+    <span [class.hidden]="collapsed">Invoicing</span></a></li>
   <li class="sidebar-links__item">
     <a [routerLinkActive]="['active-link']" [routerLink]="['reports']" class="flex items-center">
       <svg class="w-5 h-5 inline" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
@@ -60,7 +60,7 @@
           stroke-linejoin="round" />
       </svg>
 
-      <span>Reports</span></a>
+      <span [class.hidden]="collapsed">Reports</span></a>
   </li>
   <li class="sidebar-links__item"><a [routerLinkActive]="['active-link']" [routerLink]="['treatments']"
                                      class="flex items-center">
@@ -71,7 +71,7 @@
         stroke-linecap="round"
         stroke-linejoin="round" />
     </svg>
-    <span>Treatments</span>
+    <span [class.hidden]="collapsed">Treatments</span>
   </a>
   </li>
   <li class="sidebar-links__item"><a [routerLinkActive]="['active-link']" [routerLink]="['staff']"
@@ -84,7 +84,7 @@
         stroke-linejoin="round" />
     </svg>
 
-    <span>Staff</span></a></li>
+    <span [class.hidden]="collapsed">Staff</span></a></li>
   <li class="sidebar-links__item"><a [routerLinkActive]="['active-link']" [routerLink]="['settings']"
                                      class="flex items-center">
     <svg class="w-5 h-5 inline" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
@@ -96,5 +96,16 @@
       <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
 
-    <span>Settings</span></a></li>
+    <span [class.hidden]="collapsed">Settings</span></a></li>
 </ul>
+<div (click)="toggleCollapse()" class="sidebar-collapse">
+
+  <svg [@collapse]="collapsed ? 'collapsed' : 'expanded'" class="w-4 h-4 " fill="none" stroke="currentColor"
+       stroke-width="1.5"
+       viewBox="0 0 24 24"
+       xmlns="http://www.w3.org/2000/svg">
+    <path d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+
+</div>

@@ -1,12 +1,11 @@
-package com.shegami.dentistmanagement.services.auth;
+package com.shegami.dentistmanagement.services.user;
 
 import com.shegami.dentistmanagement.entities.AppUser;
-import com.shegami.dentistmanagement.entities.Role;
 import com.shegami.dentistmanagement.models.user.RoleEnum;
 
 import java.util.List;
 
-public interface AccountService {
+public interface UserService {
     AppUser addNewUser(AppUser appUser);
 
     AppUser getUserById(String id);

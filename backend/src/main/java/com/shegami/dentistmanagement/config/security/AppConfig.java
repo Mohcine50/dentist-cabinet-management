@@ -25,6 +25,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 @AllArgsConstructor
 @Configuration
 @EnableConfigurationProperties(RsaKeysConfig.class)
+@EnableJpaAuditing
 public class AppConfig {
 
     private RsaKeysConfig rsaKeysConfig;

@@ -3,7 +3,7 @@ package com.shegami.dentistmanagement.graphql.treatments;
 import com.shegami.dentistmanagement.entities.AppUser;
 import com.shegami.dentistmanagement.entities.Treatment;
 import com.shegami.dentistmanagement.models.treatments.TreatmentDto;
-import com.shegami.dentistmanagement.services.auth.AccountService;
+import com.shegami.dentistmanagement.services.user.UserService;
 import com.shegami.dentistmanagement.services.treatments.TreatmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -18,14 +18,14 @@ public class TreatmentsMutation {
 
     private final TreatmentService treatmentService;
 
-    private final AccountService accountService;
+    private final UserService userService;
 
     @MutationMapping()
     public Treatment addTreatment(@Argument TreatmentDto treatmentData){
 
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        AppUser user = accountService.loadUserByUsername(authentication.getName());
+        AppUser user = userService.loadUserByUsername(authentication.getName());
 
 
         Treatment treatment = Treatment.builder()

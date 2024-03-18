@@ -1,6 +1,7 @@
 package com.shegami.dentistmanagement.services.auth;
 
 import com.shegami.dentistmanagement.entities.AppUser;
+import com.shegami.dentistmanagement.services.user.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -16,16 +17,16 @@ import java.util.stream.Collectors;
 public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
 
-    private final AccountService accountService;
+    private final UserService userService;
 
-    public CustomUserDetailsServiceImpl(AccountService accountService) {
-        this.accountService = accountService;
+    public CustomUserDetailsServiceImpl(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        AppUser user = accountService.loadUserByUsername(username);
+        AppUser user = userService.loadUserByUsername(username);
 
         Collection<GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName().toString())).collect(Collectors.toList());
 

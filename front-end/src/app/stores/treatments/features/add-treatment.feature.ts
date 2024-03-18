@@ -14,9 +14,6 @@ export function withAddTreatment() {
   return signalStoreFeature(
     withMethods((state, treatmentsService = inject(TreatmentsService)) => ({
       addTreatment(treatmentVars: DemAddTreatmentMutationVariables) {
-        patchState(state, (state: any) => ({
-          treatments: [...state.treatments, treatmentVars],
-        }));
         treatmentsService
           .addTreatment(treatmentVars)
           .pipe(tap(console.log))

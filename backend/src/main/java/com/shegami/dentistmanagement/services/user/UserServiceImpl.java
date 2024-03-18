@@ -1,4 +1,4 @@
-package com.shegami.dentistmanagement.services.auth;
+package com.shegami.dentistmanagement.services.user;
 
 import com.shegami.dentistmanagement.entities.AppUser;
 import com.shegami.dentistmanagement.entities.Role;
@@ -7,7 +7,6 @@ import com.shegami.dentistmanagement.exceptions.NotFoundException;
 import com.shegami.dentistmanagement.models.user.RoleEnum;
 import com.shegami.dentistmanagement.repositories.users.AppUserRepository;
 import com.shegami.dentistmanagement.repositories.roles.RoleRepository;
-import com.shegami.dentistmanagement.services.auth.AccountService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,11 +20,10 @@ import java.util.List;
 @Service
 @Transactional
 @AllArgsConstructor
-public class AccountServiceImpl implements AccountService {
+public class UserServiceImpl implements UserService {
 
     private final AppUserRepository appUserRepository;
     private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -37,19 +35,7 @@ public class AccountServiceImpl implements AccountService {
             throw new ApiRequestException("Username Already Exist please try other one");
         }
 
-        Role role = roleRepository.findByName(RoleEnum.USER);
-
-        AppUser newUser = AppUser.builder()
-                .username(appUser.getUsername())
-                .password(passwordEncoder.encode(appUser.getPassword()))
-                .roles(List.of(role))
-                .build();
-
-
-        appUserRepository.save(newUser);
-
-
-        return newUser;
+        return appUserRepository.save(appUser);
     }
 
     @Override

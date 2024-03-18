@@ -5,14 +5,14 @@ import {
   inject,
   Input,
   OnInit,
-  Output,
+  Output
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { RolesStore } from '../../../stores/roles/roles.store';
 import { getState } from '@ngrx/signals';
@@ -28,10 +28,10 @@ import { SingleSelectInputComponent } from '../../../shared/components/singleSel
     CommonModule,
     ReactiveFormsModule,
     MultiSelectInputComponent,
-    SingleSelectInputComponent,
+    SingleSelectInputComponent
   ],
   templateUrl: './add-staff.component.html',
-  styleUrl: './add-staff.component.scss',
+  styleUrl: './add-staff.component.scss'
 })
 export class AddStaffComponent implements OnInit {
   readonly rolesStore = inject(RolesStore);
@@ -40,6 +40,7 @@ export class AddStaffComponent implements OnInit {
   selectedOptions: any;
   protected staffForm!: FormGroup;
   protected fullName = new FormControl('', [Validators.required]);
+  protected username = new FormControl('', [Validators.required]);
   protected bio = new FormControl('', [Validators.required]);
   protected phoneNumber = new FormControl('', [Validators.required]);
   protected gender = new FormControl('', [Validators.required]);
@@ -63,6 +64,7 @@ export class AddStaffComponent implements OnInit {
   ngOnInit(): void {
     this.staffForm = new FormGroup({
       fullName: this.fullName,
+      username: this.username,
       bio: this.bio,
       phoneNumber: this.phoneNumber,
       gender: this.gender,
@@ -71,7 +73,7 @@ export class AddStaffComponent implements OnInit {
       otherPhoneNumber: this.otherPhoneNumber,
       cinNumber: this.cinNumber,
       email: this.email,
-      roles: this.roles,
+      roles: this.roles
     });
 
     this.rolesStore.loadAllRoles();

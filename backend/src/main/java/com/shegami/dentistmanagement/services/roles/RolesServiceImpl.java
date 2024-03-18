@@ -2,6 +2,7 @@ package com.shegami.dentistmanagement.services.roles;
 
 import com.shegami.dentistmanagement.entities.Role;
 import com.shegami.dentistmanagement.exceptions.ApiRequestException;
+import com.shegami.dentistmanagement.models.user.RoleEnum;
 import com.shegami.dentistmanagement.repositories.roles.RoleRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,17 @@ import java.util.List;
 public class RolesServiceImpl implements RolesService {
 
     private final RoleRepository roleRepository;
+
+
+    @Override
+    public Role getRoleById(String id){
+        return roleRepository.findRoleById(id);
+    }
+
+    @Override
+    public Role getRoleByName(RoleEnum roleName){
+        return roleRepository.findByName(roleName);
+    }
 
     @Override
     public List<Role> loadAllRoles() {
@@ -38,4 +50,7 @@ public class RolesServiceImpl implements RolesService {
 
         return newRole;
     }
+
+
+
 }

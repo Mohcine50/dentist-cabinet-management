@@ -1,15 +1,18 @@
 package com.shegami.dentistmanagement;
 
+import com.shegami.dentistmanagement.entities.AppUser;
+import com.shegami.dentistmanagement.entities.Role;
 import com.shegami.dentistmanagement.models.user.RoleEnum;
-import com.shegami.dentistmanagement.services.auth.AccountService;
+import com.shegami.dentistmanagement.services.roles.RolesService;
+import com.shegami.dentistmanagement.services.user.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @SpringBootApplication
-@EnableJpaAuditing
 public class DentistManagementApplication {
 
 
@@ -18,27 +21,27 @@ public class DentistManagementApplication {
 	}
 
 
-	//@Bean()
-	CommandLineRunner commandLineRunner(AccountService accountService) {
+	@Bean()
+	CommandLineRunner commandLineRunner(UserService accountService, RolesService rolesService, PasswordEncoder passwordEncoder) {
 
 		return args -> {
 
-			//accountService.addNewRole(new Role(null, RoleEnum.ADMIN));
-			//accountService.addNewRole(new Role(null, RoleEnum.USER));
-			//accountService.addNewRole(new Role(null, RoleEnum.MANAGER));
-			//accountService.addNewRole(new Role(null, RoleEnum.STAFF));
-			//accountService.addNewRole(new Role(null, RoleEnum.REPORT_VIEWER));
-			//accountService.addNewRole(new Role(null, RoleEnum.REPORT_EDITOR));
-			//accountService.addNewRole(new Role(null, RoleEnum.APPOINTMENT_EDITOR));
-			//accountService.addNewRole(new Role(null, RoleEnum.APPOINTMENT_VIEWER));
-			//accountService.addNewRole(new Role(null, RoleEnum.PATIENT_EDITOR));
-			//accountService.addNewRole(new Role(null, RoleEnum.PATIENT_VIEWER));
-			//accountService.addNewRole(new Role(null, RoleEnum.INVOICE_EDITOR));
-			//accountService.addNewRole(new Role(null, RoleEnum.INVOICE_VIEWER));
+			rolesService.addNewRole(new Role(null, RoleEnum.ADMIN));
+			rolesService.addNewRole(new Role(null, RoleEnum.USER));
+			rolesService.addNewRole(new Role(null, RoleEnum.MANAGER));
+			rolesService.addNewRole(new Role(null, RoleEnum.STAFF));
+			rolesService.addNewRole(new Role(null, RoleEnum.REPORT_VIEWER));
+			rolesService.addNewRole(new Role(null, RoleEnum.REPORT_EDITOR));
+			rolesService.addNewRole(new Role(null, RoleEnum.APPOINTMENT_EDITOR));
+			rolesService.addNewRole(new Role(null, RoleEnum.APPOINTMENT_VIEWER));
+			rolesService.addNewRole(new Role(null, RoleEnum.PATIENT_EDITOR));
+			rolesService.addNewRole(new Role(null, RoleEnum.PATIENT_VIEWER));
+			rolesService.addNewRole(new Role(null, RoleEnum.INVOICE_EDITOR));
+			rolesService.addNewRole(new Role(null, RoleEnum.INVOICE_VIEWER));
 
-			//accountService.addNewUser(new AppUser(null, "admin", "admin@gmail.com", "123456789", null));
-			//accountService.addNewUser(new AppUser(null, "user", "user@gmail.com", "123456789", null));
-			//accountService.addNewUser(new AppUser(null, "manager", "manager@gmail.com", "123456789", null));
+			accountService.addNewUser(new AppUser(null, "admin", passwordEncoder.encode("123456789"),null,null, false));
+			accountService.addNewUser(new AppUser(null, "user",  passwordEncoder.encode("123456789"), null, null, true));
+			accountService.addNewUser(new AppUser(null, "manager",  passwordEncoder.encode("123456789"), null,null, false));
 
 
 			accountService.addRoleToUser("admin", RoleEnum.ADMIN);

@@ -3,7 +3,7 @@ package com.shegami.dentistmanagement.controllers;
 import com.shegami.dentistmanagement.entities.AppUser;
 import com.shegami.dentistmanagement.entities.Role;
 import com.shegami.dentistmanagement.models.user.RoleToUser;
-import com.shegami.dentistmanagement.services.auth.AccountService;
+import com.shegami.dentistmanagement.services.user.UserService;
 import com.shegami.dentistmanagement.services.roles.RolesService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -21,25 +21,25 @@ import java.util.Map;
 @RequestMapping(path = "/api/users")
 public class AccountController {
 
-    private final AccountService accountService;
+    private final UserService userService;
     private final RolesService roleService;
 
-    public AccountController(@Lazy AccountService accountService, RolesService roleService) {
-        this.accountService = accountService;
+    public AccountController(@Lazy UserService userService, RolesService roleService) {
+        this.userService = userService;
         this.roleService = roleService;
     }
 
     @QueryMapping
     public List<AppUser> listAllUsers() {
-        System.out.println(accountService.listAllUsers());
-        return accountService.listAllUsers();
+        System.out.println(userService.listAllUsers());
+        return userService.listAllUsers();
     }
 
     @GetMapping("all")
     @ResponseBody
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public List<AppUser> allUsers() {
-        return accountService.listAllUsers();
+        return userService.listAllUsers();
     }
 
     @GetMapping("id/{id}")
@@ -47,7 +47,7 @@ public class AccountController {
     @PreAuthorize("hasAuthority('SCOPE_USER')")
     public ResponseEntity<AppUser> getUserById(@PathVariable("id") String id) {
 
-        AppUser user = accountService.getUserById(id);
+        AppUser user = userService.getUserById(id);
 
         return new ResponseEntity<>(user, HttpStatus.FOUND);
     }
@@ -58,7 +58,7 @@ public class AccountController {
     @PreAuthorize("hasAuthority('SCOPE_USER')")
     public ResponseEntity<AppUser> getUserByUsername(@PathVariable("username") String username) {
 
-        AppUser user = accountService.getUserByUsername(username);
+        AppUser user = userService.getUserByUsername(username);
 
         return new ResponseEntity<>(user, HttpStatus.FOUND);
     }
@@ -68,7 +68,7 @@ public class AccountController {
     public ResponseEntity<AppUser> addUser(@RequestBody AppUser appUser) {
 
 
-        AppUser user = accountService.addNewUser(appUser);
+        AppUser user = userService.addNewUser(appUser);
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
@@ -77,7 +77,7 @@ public class AccountController {
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Object> deleteUser(@PathVariable String id) {
 
-        accountService.deleteUser(id);
+        userService.deleteUser(id);
 
         return new ResponseEntity<>(Map.of("Message", "User Deleted Successfully"), HttpStatus.OK);
     }
@@ -95,7 +95,7 @@ public class AccountController {
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Object> addRoleToUser(@RequestBody RoleToUser roleToUser) {
 
-        accountService.addRoleToUser(roleToUser.getUsername(), roleToUser.getRole());
+        userService.addRoleToUser(roleToUser.getUsername(), roleToUser.getRole());
 
         return new ResponseEntity<>(Map.of("Message", "Role added To user Successfully"), HttpStatus.OK);
     }
@@ -105,7 +105,7 @@ public class AccountController {
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Object> deleteRole(@PathVariable String id) {
 
-        accountService.deleteRole(id);
+        userService.deleteRole(id);
 
         return new ResponseEntity<>(Map.of("Message", "Role Deleted Successfully"), HttpStatus.OK);
     }

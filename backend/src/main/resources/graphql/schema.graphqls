@@ -11,12 +11,16 @@ type Query {
 
 type Mutation {
 
-    addStaffMember(registerAuthManager: RegisterAuthManager!): User
+    """STAFF"""
+    addStaffMember(staff: StaffInput!): User
 
     """TREATMENTS"""
     deleteTreatment(id: String!): String!
     updateTreatment(id: String!): Treatment
     addTreatment(treatmentData: TreatmentInput!): Treatment
+
+
+
 }
 
 

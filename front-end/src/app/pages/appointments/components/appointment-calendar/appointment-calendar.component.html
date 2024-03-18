@@ -1,0 +1,25 @@
+<div class="calendar grid grid-cols-8">
+  <!-- Render weekdays on header -->
+  <div class="day-header col-span-1 flex justify-center items-center bg-gray-200 border border-gray-300">Sun</div>
+  <div class="day-header col-span-1 flex justify-center items-center bg-gray-200 border border-gray-300">Mon</div>
+  <div class="day-header col-span-1 flex justify-center items-center bg-gray-200 border border-gray-300">Tue</div>
+  <div class="day-header col-span-1 flex justify-center items-center bg-gray-200 border border-gray-300">Wed</div>
+  <div class="day-header col-span-1 flex justify-center items-center bg-gray-200 border border-gray-300">Thu</div>
+  <div class="day-header col-span-1 flex justify-center items-center bg-gray-200 border border-gray-300">Fri</div>
+  <div class="day-header col-span-1 flex justify-center items-center bg-gray-200 border border-gray-300">Sat</div>
+
+  <!-- Render dates with 10-minute time slots on the left -->
+  <div class="date-column col-span-1">
+    <div *ngFor="let _ of Array(timeSlotsInDay).keys()" class="date-cell border-b border-gray-300">
+      {{ (_ * 10) % 60 == 0 ? ('0' + Math.floor(_ / 6)).slice(-2) + ':' + (_ % 6) + '0' : '' }}
+    </div>
+  </div>
+
+  <!-- Render appointments -->
+  <ng-container *ngFor="let appointment of appointments">
+    <div [ngStyle]="getAppointmentPosition(appointment)"
+         class="appointment bg-blue-200 border border-blue-300 col-span-1">
+      {{ appointment.title }}
+    </div>
+  </ng-container>
+</div>
