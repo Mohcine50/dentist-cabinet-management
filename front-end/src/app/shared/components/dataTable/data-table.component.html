@@ -12,7 +12,20 @@
       @for (item of tableData; let i = $index; track i) {
         <tr>
           @for (header of tableHeader; let i = $index; track i) {
-            <td>{{ item[header] }}</td>
+            <td>
+              @if (showImage && i === 0) {
+                <div class="flex items-center gap-2">
+                  <img
+                    [src]="'https://api.dicebear.com/8.x/initials/svg?radius=50&size=32&fontSize=44&seed=' + item[header]"
+                    alt="avatar"
+                  />
+                  <h4>{{ item[header] }}</h4>
+                </div>
+              } @else {
+                <h4>{{ item[header] }}</h4>
+              }
+
+            </td>
           }
           <td class="flex gap-4 items-center justify-end">
             <span (click)="onEditEventClick(item)"

@@ -12,6 +12,7 @@ export class DataTableComponent implements OnInit {
   @Input() tableHeader!: string[];
   @Input() tableData!: any[];
   @Output() editEvent = new EventEmitter();
+  @Input() showImage? = false;
 
   constructor() {}
 

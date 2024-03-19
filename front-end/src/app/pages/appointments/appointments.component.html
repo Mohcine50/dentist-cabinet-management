@@ -1,1 +1,27 @@
-<dem-appointment-calendar />
+<div class="flex items-center justify-between w-full">
+  <ul class="flex gap-4 items-center">
+    <li><a [routerLinkActiveOptions]="{exact:
+true}" [routerLinkActive]="['text-main-blue']"
+           [routerLink]="['/appointments-management'] ">List View</a></li>
+    <li><a [queryParams]="{view: 'calendar-view'}" [routerLinkActiveOptions]="{exact:
+true}" [routerLinkActive]="['text-main-blue']"
+           [routerLink]="['/appointments-management']">Calendar View</a></li>
+  </ul>
+  <button class="dem-btn">Create Session</button>
+</div>
+
+<div class="grow flex gap-4">
+  <div>
+    <h2 class="mb-4">Upcoming sessions</h2>
+    <div class="flex flex-col gap-4">
+      @for (s of [1, 1, 1, 1]; track s) {
+        <dem-upcoming-session-card />
+      }
+    </div>
+  </div>
+  @if (view) {
+    <dem-calendar-view />
+  } @else {
+    <dem-list-view />
+  }
+</div>
