@@ -1,1 +1,19 @@
-<p>list-view works!</p>
+<div class="flex gap-4 items-center text-[0.87rem]">
+  <button class="dem-btn "><a [queryParams]="{view:'list',filter: 'all'}"
+                              [routerLink]="['/appointments-management']">All</a>
+  </button>
+  <button class="dem-btn !bg-[#EEF8FA] !text-main-blue"><a [queryParams]="{view:'list',filter: 'upcoming'}"
+                                                           [routerLink]="['/appointments-management']">Upcoming</a>
+  </button>
+  <button class="dem-btn !bg-[#EEF8FA] !text-main-blue"><a [queryParams]="{view:'list',filter: 'expired'}"
+                                                           [routerLink]="['/appointments-management']">Expired</a>
+  </button>
+  <button class="dem-btn !bg-[#EEF8FA] !text-main-blue"><a [queryParams]="{view:'list',filter: 'canceled'}"
+                                                           [routerLink]="['/appointments-management']">Canceled</a>
+  </button>
+</div>
+
+<dem-data-table
+  [tableData]="tableData"
+  [tableHeader]="patientTableHeader"
+/>

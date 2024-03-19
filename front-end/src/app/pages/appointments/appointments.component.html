@@ -1,9 +1,8 @@
 <div class="flex items-center justify-between w-full">
   <ul class="flex gap-4 items-center">
-    <li><a [routerLinkActiveOptions]="{exact:
-true}" [routerLinkActive]="['text-main-blue']"
-           [routerLink]="['/appointments-management'] ">List View</a></li>
-    <li><a [queryParams]="{view: 'calendar-view'}" [routerLinkActiveOptions]="{exact:
+    <li><a [queryParams]="{view:'list', filter: 'all'}"
+           [routerLinkActive]="['text-main-blue']" [routerLink]="['/appointments-management'] ">List View</a></li>
+    <li><a [queryParams]="{view: 'calendar'}" [routerLinkActiveOptions]="{exact:
 true}" [routerLinkActive]="['text-main-blue']"
            [routerLink]="['/appointments-management']">Calendar View</a></li>
   </ul>
@@ -19,7 +18,7 @@ true}" [routerLinkActive]="['text-main-blue']"
       }
     </div>
   </div>
-  @if (view) {
+  @if (view === "calendar") {
     <dem-calendar-view />
   } @else {
     <dem-list-view />
