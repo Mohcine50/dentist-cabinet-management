@@ -2,8 +2,7 @@
   <ul class="flex gap-4 items-center">
     <li><a [queryParams]="{view:'list', filter: 'all'}"
            [routerLinkActive]="['text-main-blue']" [routerLink]="['/appointments-management'] ">List View</a></li>
-    <li><a [queryParams]="{view: 'calendar'}" [routerLinkActiveOptions]="{exact:
-true}" [routerLinkActive]="['text-main-blue']"
+    <li><a [queryParams]="{view: 'calendar', filter:'monthly'}" [routerLinkActive]="['text-main-blue']"
            [routerLink]="['/appointments-management']">Calendar View</a></li>
   </ul>
   <button class="dem-btn">Create Session</button>

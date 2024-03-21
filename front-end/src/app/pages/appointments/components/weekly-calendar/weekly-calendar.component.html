@@ -1,0 +1,28 @@
+<div class="flex items-center gap-4">
+  <svg (click)="previousWeek()" class="w-5 h-5 inline-block cursor-pointer" fill="none" stroke="currentColor"
+       stroke-width="1.5"
+       viewBox="0 0 24 24"
+       xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.75 19.5 8.25 12l7.5-7.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+  <span class="inline-block">{{ todayDate | date: 'LLLL yyyy' }}</span>
+  <svg (click)="nextWeek()" class="w-5 h-5 inline-block cursor-pointer" fill="none" stroke="currentColor"
+       stroke-width="1.5"
+       viewBox="0 0 24 24"
+       xmlns="http://www.w3.org/2000/svg">
+    <path d="m8.25 4.5 7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+</div>
+
+<div class="grid grid-cols-7 border-collapse border-spacing-0">
+  @for (day of weekDays; let i = $index; track i) {
+    <div
+      class="py-1 border-[#CEE7F8] border flex flex-col gap-1 items-center justify-center bg-[#E6F3FC] font-medium text-[0.86rem] text-gray-800"
+      [ngClass]="{'!text-gray-500': !isToday(day)}"
+    >
+      <span class="inline-block">{{ day | date: "EEEE" }}</span>
+      <span class="inline-block">{{ day | date: "dd" }}</span>
+    </div>
+  }
+</div>

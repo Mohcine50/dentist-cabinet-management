@@ -1,1 +1,26 @@
-<p>calendar-view works!</p>
+<div class="flex gap-4 items-center text-[0.87rem]">
+  <button [ngClass]="{'!bg-[#EEF8FA] !text-main-blue' : calenderType !== 'monthly'}" class="dem-btn"><a
+    [queryParams]="{view:'calendar',filter: 'monthly'}"
+    [routerLink]="['/appointments-management']">Monthly</a>
+  </button>
+  <button [ngClass]="{'!bg-[#EEF8FA] !text-main-blue' : calenderType !== 'weekly'}" class="dem-btn"><a
+    [queryParams]="{view:'calendar',filter: 'weekly'}"
+    [routerLink]="['/appointments-management']">Weekly</a>
+  </button>
+  <button [ngClass]="{'!bg-[#EEF8FA] !text-main-blue' : calenderType !== 'daily'}" class="dem-btn"><a
+    [queryParams]="{view:'calendar',filter: 'daily'}"
+    [routerLink]="['/appointments-management']">Daily</a>
+  </button>
+</div>
+
+@switch (calenderType) {
+  @case ("daily") {
+    <dem-daily-calendar />
+  }
+  @case ("weekly") {
+    <dem-weekly-calendar />
+  }
+  @default {
+    <dem-monthly-calendar />
+  }
+}
