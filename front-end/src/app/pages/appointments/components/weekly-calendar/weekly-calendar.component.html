@@ -6,7 +6,7 @@
     <path d="M15.75 19.5 8.25 12l7.5-7.5" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 
-  <span class="inline-block">{{ todayDate | date: 'LLLL yyyy' }}</span>
+  <span class="inline-block">{{ currentMonth }}</span>
   <svg (click)="nextWeek()" class="w-5 h-5 inline-block cursor-pointer" fill="none" stroke="currentColor"
        stroke-width="1.5"
        viewBox="0 0 24 24"
@@ -14,15 +14,36 @@
     <path d="m8.25 4.5 7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 </div>
+<div class="flex gap-3.5">
+  <div>
+    <div class="h-14"></div>
+    @for (time of filteredMinutes; let i = $index; track i) {
+      <div class="h-28 flex items-center justify-center text-[0.86rem] text-gray-800 font-medium">
+        <time>{{ time | date:'hh:mm a' }}</time>
+      </div>
+    }
+  </div>
+  <div class="grid grid-cols-7 border-collapse border-spacing-0 grow">
+    @for (day of weekDays; let i = $index; track i) {
+      <div>
+        <div
+          class="py-1 border-[#CEE7F8] border flex flex-col gap-1 items-center justify-center bg-[#E6F3FC] font-medium text-[0.86rem] text-gray-800"
+          [ngClass]="{'!text-gray-500': !isToday(day)}"
+        >
+          <span class="inline-block">{{ day | date: "EEEE" }}</span>
+          <span class="inline-block">{{ day | date: "dd" }}</span>
+        </div>
+        <div class="grid grid-flow-row">
+          @for (time of generateTimesFromDayTime(day); let i = $index; track i; ) {
+            <div
+              class="h-28 border-gray-300 border flex items-center justify-center text-[0.86rem] font-medium text-[0.87] text-gray-800"
+            >
+              <time [dateTime]="time">{{ time | date:'hh:mm a' }}</time>
+            </div>
+          }
+        </div>
+      </div>
+    }
 
-<div class="grid grid-cols-7 border-collapse border-spacing-0">
-  @for (day of weekDays; let i = $index; track i) {
-    <div
-      class="py-1 border-[#CEE7F8] border flex flex-col gap-1 items-center justify-center bg-[#E6F3FC] font-medium text-[0.86rem] text-gray-800"
-      [ngClass]="{'!text-gray-500': !isToday(day)}"
-    >
-      <span class="inline-block">{{ day | date: "EEEE" }}</span>
-      <span class="inline-block">{{ day | date: "dd" }}</span>
-    </div>
-  }
+  </div>
 </div>
