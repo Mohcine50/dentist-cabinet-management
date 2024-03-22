@@ -27,33 +27,32 @@ import {
 export class WeeklyCalendarComponent implements OnInit {
   todayDate = startOfToday();
   firstDayOfWeek = startOfWeek(this.todayDate, { weekStartsOn: 1 });
-  startHour = new Date().setHours(8, 30);
-  endHour = new Date().setHours(18);
 
-  minutes = eachMinuteOfInterval(
-    { start: this.startHour, end: this.endHour },
-    {
-      step: 15,
-    }
-  );
-  protected readonly isThisMonth = isThisMonth;
   protected readonly isToday = isToday;
+
+  get hoursOfDay() {
+    return eachMinuteOfInterval(
+      {
+        start: this.todayDate.setHours(8, 30),
+        end: this.todayDate.setHours(18),
+      },
+      {
+        step: 15,
+      }
+    ).filter(
+      (minute) =>
+        !isWithinInterval(minute, {
+          start: this.todayDate.setHours(11),
+          end: this.todayDate.setHours(13),
+        })
+    );
+  }
 
   get weekDays() {
     return eachDayOfInterval({
       start: startOfWeek(this.firstDayOfWeek, { weekStartsOn: 1 }),
       end: endOfWeek(this.firstDayOfWeek, { weekStartsOn: 1 }),
     });
-  }
-
-  get filteredMinutes() {
-    return this.minutes.filter(
-      (minute) =>
-        !isWithinInterval(minute, {
-          start: new Date().setHours(11),
-          end: new Date().setHours(13),
-        })
-    );
   }
 
   get currentMonth() {

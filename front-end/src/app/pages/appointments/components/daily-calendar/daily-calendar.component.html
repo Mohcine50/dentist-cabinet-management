@@ -1,1 +1,37 @@
-<p>daily-calendar works!</p>
+<div class="flex items-center gap-4">
+  <svg (click)="previousDay()" class="w-5 h-5 inline-block cursor-pointer" fill="none" stroke="currentColor"
+       stroke-width="1.5"
+       viewBox="0 0 24 24"
+       xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.75 19.5 8.25 12l7.5-7.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+  <span class="inline-block">{{ selectedDay | date: 'EEEE d MMMM, y' }}</span>
+  <svg (click)="nextDay()" class="w-5 h-5 inline-block cursor-pointer" fill="none" stroke="currentColor"
+       stroke-width="1.5"
+       viewBox="0 0 24 24"
+       xmlns="http://www.w3.org/2000/svg">
+    <path d="m8.25 4.5 7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+</div>
+<div class="flex gap-3.5">
+  <div>
+    @for (time of hoursOfDay; let i = $index; track i) {
+      <div class="h-28 flex items-center justify-center text-[0.86rem] text-gray-800 font-medium">
+        <time>{{ time | date:'hh:mm a' }}</time>
+      </div>
+    }
+  </div>
+  <div class="grid grid-cols-1 border-collapse border-spacing-0 grow rounded-md overflow-hidden ring-1">
+    @for (time of hoursOfDay; let i = $index; track i) {
+      <div>
+        <div
+          class="py-1 h-28 border-[#CEE7F8] border font-medium text-[0.86rem] text-gray-800 border-l-0 border-r-0"
+        >
+          <time>{{ time | date:'hh:mm a' }}</time>
+        </div>
+      </div>
+    }
+
+  </div>
+</div>
