@@ -5,20 +5,21 @@ import {
   inject,
   Input,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { RolesStore } from '../../../stores/roles/roles.store';
 import { getState } from '@ngrx/signals';
 import { DemLoadAllRolesQuery } from '../../../data-access/generated/generated';
 import { MultiSelectInputComponent } from '../../../shared/components/multiSelectInput/multi-select-input.component';
 import { SingleSelectInputComponent } from '../../../shared/components/singleSelectInput/single-select-input.component';
+import { StaffStore } from '../../../stores/staff/staff.store';
 
 @Component({
   selector: 'dem-add-staff',
@@ -28,13 +29,14 @@ import { SingleSelectInputComponent } from '../../../shared/components/singleSel
     CommonModule,
     ReactiveFormsModule,
     MultiSelectInputComponent,
-    SingleSelectInputComponent
+    SingleSelectInputComponent,
   ],
   templateUrl: './add-staff.component.html',
-  styleUrl: './add-staff.component.scss'
+  styleUrl: './add-staff.component.scss',
 })
 export class AddStaffComponent implements OnInit {
   readonly rolesStore = inject(RolesStore);
+  readonly staffStore = inject(StaffStore);
 
   @Output() event = new EventEmitter<void>();
   selectedOptions: any;
@@ -49,7 +51,7 @@ export class AddStaffComponent implements OnInit {
   protected otherPhoneNumber = new FormControl('', [Validators.required]);
   protected cinNumber = new FormControl('', [Validators.required]);
   protected email = new FormControl('', [Validators.required]);
-  protected roles = new FormControl('', [Validators.required]);
+  protected role = new FormControl('', [Validators.required]);
 
   constructor() {
     effect(() => {
@@ -73,15 +75,30 @@ export class AddStaffComponent implements OnInit {
       otherPhoneNumber: this.otherPhoneNumber,
       cinNumber: this.cinNumber,
       email: this.email,
-      roles: this.roles
+      role: this.role,
     });
-
     this.rolesStore.loadAllRoles();
   }
 
   addStaffForm(event: Event) {
     event.preventDefault();
     console.log(this.staffForm.value);
+    const {
+      role,
+      fullName,
+      username,
+      bio,
+      phoneNumber,
+      gernder,
+      address,
+      city,
+      otherPhoneNumber,
+      cinNumber,
+      email,
+    } = this.staffForm.controls;
+    this.staffStore.addStaffMember({
+      staff: this.staffForm.value,
+    });
     this.event.emit();
   }
 

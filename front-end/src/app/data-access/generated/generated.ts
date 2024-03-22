@@ -25,6 +25,7 @@ export type DemLoginResponse = {
 
 export type DemMutation = {
   __typename?: 'Mutation';
+  /** STAFF */
   addStaffMember?: Maybe<DemUser>;
   addTreatment?: Maybe<DemTreatment>;
   /** TREATMENTS */
@@ -34,7 +35,7 @@ export type DemMutation = {
 
 
 export type DemMutationAddStaffMemberArgs = {
-  registerAuthManager: DemRegisterAuthManager;
+  staff: DemStaffInput;
 };
 
 
@@ -54,18 +55,16 @@ export type DemMutationUpdateTreatmentArgs = {
 
 export type DemProfile = {
   __typename?: 'Profile';
-  bio?: Maybe<Scalars['Int']['output']>;
-  cin?: Maybe<Scalars['Int']['output']>;
+  bio?: Maybe<Scalars['String']['output']>;
+  cin?: Maybe<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
-  createdAt?: Maybe<DemUser>;
+  createdAt?: Maybe<Scalars['String']['output']>;
   fullName?: Maybe<Scalars['String']['output']>;
   gender?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   otherPhoneNumber?: Maybe<Scalars['String']['output']>;
   phoneNumber?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['String']['output']>;
-  updatedBy?: Maybe<DemUser>;
-  user?: Maybe<DemUser>;
 };
 
 export type DemQuery = {
@@ -102,20 +101,18 @@ export type DemRole = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
-export type DemStaff = {
-  __typename?: 'Staff';
-  bio?: Maybe<Scalars['Int']['output']>;
-  cin?: Maybe<Scalars['Int']['output']>;
-  city?: Maybe<Scalars['String']['output']>;
-  createdAt?: Maybe<DemUser>;
-  fullName?: Maybe<Scalars['String']['output']>;
-  gender?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['String']['output']>;
-  otherPhoneNumber?: Maybe<Scalars['String']['output']>;
-  phoneNumber?: Maybe<Scalars['String']['output']>;
-  updatedAt?: Maybe<Scalars['String']['output']>;
-  updatedBy?: Maybe<DemUser>;
-  user?: Maybe<DemUser>;
+export type DemStaffInput = {
+  address?: InputMaybe<Scalars['String']['input']>;
+  bio?: InputMaybe<Scalars['String']['input']>;
+  cinNumber?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  fullName?: InputMaybe<Scalars['String']['input']>;
+  gender?: InputMaybe<Scalars['String']['input']>;
+  otherPhoneNumber?: InputMaybe<Scalars['String']['input']>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DemTreatment = {
@@ -142,6 +139,7 @@ export type DemUser = {
   email?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   password?: Maybe<Scalars['String']['output']>;
+  profile?: Maybe<DemProfile>;
   username?: Maybe<Scalars['String']['output']>;
 };
 
@@ -157,6 +155,13 @@ export type DemLoadAllRolesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type DemLoadAllRolesQuery = { __typename?: 'Query', loadAllRoles: Array<{ __typename?: 'Role', id?: string | null | undefined, name?: string | null | undefined } | null | undefined> };
+
+export type DemAddStaffMemberMutationVariables = Exact<{
+  staff: DemStaffInput;
+}>;
+
+
+export type DemAddStaffMemberMutation = { __typename?: 'Mutation', addStaffMember?: { __typename?: 'User', id?: string | null | undefined, username?: string | null | undefined, password?: string | null | undefined, profile?: { __typename?: 'Profile', cin?: string | null | undefined, phoneNumber?: string | null | undefined, otherPhoneNumber?: string | null | undefined, createdAt?: string | null | undefined, city?: string | null | undefined, fullName?: string | null | undefined, gender?: string | null | undefined, id?: string | null | undefined, bio?: string | null | undefined } | null | undefined } | null | undefined };
 
 export type DemAddTreatmentMutationVariables = Exact<{
   name: Scalars['String']['input'];
@@ -206,6 +211,37 @@ export const LoadAllRolesDocument = gql`
   })
   export class DemLoadAllRolesGQL extends Apollo.Query<DemLoadAllRolesQuery, DemLoadAllRolesQueryVariables> {
     override document = LoadAllRolesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AddStaffMemberDocument = gql`
+    mutation addStaffMember($staff: StaffInput!) {
+  addStaffMember(staff: $staff) {
+    id
+    username
+    password
+    profile {
+      cin
+      phoneNumber
+      otherPhoneNumber
+      createdAt
+      city
+      fullName
+      gender
+      id
+      bio
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DemAddStaffMemberGQL extends Apollo.Mutation<DemAddStaffMemberMutation, DemAddStaffMemberMutationVariables> {
+    override document = AddStaffMemberDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

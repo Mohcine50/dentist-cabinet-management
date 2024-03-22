@@ -1,6 +1,8 @@
 import { signalStore, withMethods, withState, patchState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { StaffService } from '../../services/staff/staff.service';
+import { withAddStaffMember } from './features/add-staff-member.feature';
+import { withLoadAllStaff } from './features/load-all-staff-members.feature';
 
 interface StaffState {
   staff: any[];
@@ -14,27 +16,7 @@ const initialState: StaffState = {
 
 export const StaffStore = signalStore(
   { providedIn: 'root' },
-  withMethods((state, staffService = inject(StaffService)) => ({
-    loadStaffMembers(): void {
-      patchState(state, () => ({ loading: true }));
-      staffService.loadAllStaffMembers().subscribe((value) => {
-        patchState(state, () => ({ loading: false, staff: value }));
-      });
-    },
-    addStaffMember(): void {
-      patchState(state, (state: any) => ({
-        loading: false,
-        staff: [
-          ...state.staff,
-          {
-            name: 'mohcine',
-            address: 'zemamra',
-            cinNumber: 'MD8J3E',
-            phoneNumber: '+2126728928',
-          },
-        ],
-      }));
-    },
-  })),
+  withAddStaffMember(),
+  withLoadAllStaff(),
   withState(initialState)
 );

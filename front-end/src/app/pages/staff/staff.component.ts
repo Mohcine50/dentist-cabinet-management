@@ -41,7 +41,6 @@ export class StaffComponent implements OnInit {
 
   addStaffForm() {
     this.rightSliderComponent.toggleSlideOver();
-    this.staffStore.addStaffMember();
   }
 
   editStaff(id: any) {

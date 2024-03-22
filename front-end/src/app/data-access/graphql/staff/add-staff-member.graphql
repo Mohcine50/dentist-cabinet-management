@@ -1,0 +1,18 @@
+mutation addStaffMember($staff: StaffInput!){
+    addStaffMember(staff: $staff){
+        id,
+        username
+        password
+        profile{
+            cin,
+            phoneNumber,
+            otherPhoneNumber,
+            createdAt,
+            city,
+            fullName,
+            gender,
+            id,
+            bio
+        }
+    }
+}

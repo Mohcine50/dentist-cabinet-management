@@ -1,12 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
+import {
+  DemAddStaffMemberGQL,
+  DemAddStaffMemberMutation,
+  DemAddStaffMemberMutationVariables,
+  DemStaffInput,
+} from '../../data-access/generated/generated';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StaffService {
-  constructor() {}
+  constructor(private addStaffMemberMutation: DemAddStaffMemberGQL) {}
+
+  addStaffMember(
+    staff: DemAddStaffMemberMutationVariables
+  ): Observable<DemAddStaffMemberMutation['addStaffMember']> {
+    return this.addStaffMemberMutation
+      .mutate(staff)
+      .pipe(map((res) => res.data?.addStaffMember));
+  }
 
   loadAllStaffMembers(): Observable<any> {
     return of([
