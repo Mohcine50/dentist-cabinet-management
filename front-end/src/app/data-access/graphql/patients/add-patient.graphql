@@ -1,0 +1,20 @@
+mutation addPatient($patient: PatientInput!){
+    addPatient(patient: $patient){
+        id
+        fullName
+        address
+        city
+        cinNumber
+        phoneNumber
+        gender
+        otherPhoneNumber
+        treatments{
+            name
+            id
+        }
+        createdBy
+        updatedBy
+        createdAt
+        updatedAt
+    }
+}

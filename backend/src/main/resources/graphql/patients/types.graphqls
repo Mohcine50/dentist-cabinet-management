@@ -5,8 +5,7 @@ fullName:String,
 
 address:String,
 city:String,
-
-cin:String,
+    cinNumber:String,
 phoneNumber:String,
 
 gender:String,

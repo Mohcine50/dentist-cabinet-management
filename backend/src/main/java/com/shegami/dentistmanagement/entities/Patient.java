@@ -41,7 +41,7 @@ public class Patient {
     private String city;
 
     @Column(nullable = false)
-    private String cin;
+    private String cinNumber;
     @Column(nullable = false, name = "phone_number")
     private String phoneNumber;
 

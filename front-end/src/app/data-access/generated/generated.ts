@@ -63,7 +63,7 @@ export type DemMutationUpdateTreatmentArgs = {
 export type DemPatient = {
   __typename?: 'Patient';
   address?: Maybe<Scalars['String']['output']>;
-  cin?: Maybe<Scalars['String']['output']>;
+  cinNumber?: Maybe<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['String']['output']>;
   createdBy?: Maybe<Scalars['String']['output']>;
@@ -86,9 +86,7 @@ export type DemPatientInput = {
   gender?: InputMaybe<Scalars['String']['input']>;
   otherPhoneNumber?: InputMaybe<Scalars['String']['input']>;
   phoneNumber?: InputMaybe<Scalars['String']['input']>;
-  role?: InputMaybe<Scalars['String']['input']>;
   treatment?: InputMaybe<Scalars['String']['input']>;
-  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DemProfile = {
@@ -109,6 +107,8 @@ export type DemProfile = {
 export type DemQuery = {
   __typename?: 'Query';
   getTreatmentById?: Maybe<DemTreatment>;
+  /** PATIENT */
+  loadAllPatients?: Maybe<Array<Maybe<DemPatient>>>;
   /**  ROLES  */
   loadAllRoles: Array<Maybe<DemRole>>;
   /**  USERS  */
@@ -194,6 +194,18 @@ export type DemLoginQueryVariables = Exact<{
 
 export type DemLoginQuery = { __typename?: 'Query', login?: { __typename?: 'LoginResponse', accessToken?: string | null | undefined, message?: string | null | undefined } | null | undefined };
 
+export type DemAddPatientMutationVariables = Exact<{
+  patient: DemPatientInput;
+}>;
+
+
+export type DemAddPatientMutation = { __typename?: 'Mutation', addPatient: { __typename?: 'Patient', id?: string | null | undefined, fullName?: string | null | undefined, address?: string | null | undefined, city?: string | null | undefined, cinNumber?: string | null | undefined, phoneNumber?: string | null | undefined, gender?: string | null | undefined, otherPhoneNumber?: string | null | undefined, createdBy?: string | null | undefined, updatedBy?: string | null | undefined, createdAt?: string | null | undefined, updatedAt?: string | null | undefined, treatments?: Array<{ __typename?: 'Treatment', name?: string | null | undefined, id?: string | null | undefined } | null | undefined> | null | undefined } };
+
+export type DemLoadAllPatientsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DemLoadAllPatientsQuery = { __typename?: 'Query', loadAllPatients?: Array<{ __typename?: 'Patient', id?: string | null | undefined, fullName?: string | null | undefined, address?: string | null | undefined, city?: string | null | undefined, cinNumber?: string | null | undefined, phoneNumber?: string | null | undefined, gender?: string | null | undefined, otherPhoneNumber?: string | null | undefined, createdBy?: string | null | undefined, updatedBy?: string | null | undefined, createdAt?: string | null | undefined, updatedAt?: string | null | undefined, treatments?: Array<{ __typename?: 'Treatment', name?: string | null | undefined, id?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
+
 export type DemLoadAllRolesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -240,6 +252,72 @@ export const LoginDocument = gql`
   })
   export class DemLoginGQL extends Apollo.Query<DemLoginQuery, DemLoginQueryVariables> {
     override document = LoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AddPatientDocument = gql`
+    mutation addPatient($patient: PatientInput!) {
+  addPatient(patient: $patient) {
+    id
+    fullName
+    address
+    city
+    cinNumber
+    phoneNumber
+    gender
+    otherPhoneNumber
+    treatments {
+      name
+      id
+    }
+    createdBy
+    updatedBy
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DemAddPatientGQL extends Apollo.Mutation<DemAddPatientMutation, DemAddPatientMutationVariables> {
+    override document = AddPatientDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const LoadAllPatientsDocument = gql`
+    query loadAllPatients {
+  loadAllPatients {
+    id
+    fullName
+    address
+    city
+    cinNumber
+    phoneNumber
+    gender
+    otherPhoneNumber
+    treatments {
+      name
+      id
+    }
+    createdBy
+    updatedBy
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DemLoadAllPatientsGQL extends Apollo.Query<DemLoadAllPatientsQuery, DemLoadAllPatientsQueryVariables> {
+    override document = LoadAllPatientsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

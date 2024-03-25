@@ -13,7 +13,7 @@ public class PatientDto implements Serializable {
     private final String bio;
     private final String address;
     private final String city;
-    private final String cin;
+    private final String cinNumber;
     private final String phoneNumber;
     private final String gender;
     private final String otherPhoneNumber;

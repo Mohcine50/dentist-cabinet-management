@@ -38,6 +38,7 @@ export class SingleSelectInputComponent
   @Input() label?: string;
   disabled = false;
   isOpen = false;
+  @Input() optionValue?: string;
 
   constructor(private element: ElementRef, private rendrer: Renderer2) {}
 
@@ -72,7 +73,6 @@ export class SingleSelectInputComponent
 
   onFocused(e: Event) {
     this.onTouched();
-    console.log('focus');
   }
 
   onBlur(e: Event) {}
@@ -85,9 +85,13 @@ export class SingleSelectInputComponent
     this.isOpen = !this.isOpen;
   }
 
-  onOptionClick(value: string) {
-    this.selectedValue = value;
-    this.onChange(value);
+  onOptionClick(value: any) {
+    let selectedValue;
+    if (this.label && !this.optionValue) selectedValue = value[this.label];
+    if (this.label && this.optionValue) selectedValue = value[this.optionValue];
+    else selectedValue = value;
+    this.selectedValue = selectedValue;
+    this.onChange(selectedValue);
     this.toggleDropdown();
   }
 

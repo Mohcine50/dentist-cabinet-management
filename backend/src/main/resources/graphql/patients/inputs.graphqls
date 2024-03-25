@@ -1,6 +1,5 @@
 input PatientInput{
     fullName: String,
-    username: String,
     cinNumber: String,
     address: String,
     bio: String,
@@ -9,5 +8,4 @@ input PatientInput{
     phoneNumber: String,
     otherPhoneNumber: String,
     treatment: String,
-    role: String
 }

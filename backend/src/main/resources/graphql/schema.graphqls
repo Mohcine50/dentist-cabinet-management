@@ -11,6 +11,9 @@ type Query {
     """TREATMENTS"""
     loadAllTreatments:[Treatment]
     getTreatmentById(id: String!): Treatment
+
+    """PATIENT"""
+    loadAllPatients: [Patient]
 }
 
 type Mutation {

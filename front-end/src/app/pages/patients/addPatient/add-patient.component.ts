@@ -55,7 +55,9 @@ export class AddPatientComponent implements OnInit {
 
   addPatientForm(event: Event) {
     event.preventDefault();
-    this.patientStore.addPatient();
+    this.patientStore.addPatient({
+      patient: this.patientForm.value,
+    });
     this.event.emit();
   }
 }
