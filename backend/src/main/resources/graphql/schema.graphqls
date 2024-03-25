@@ -1,6 +1,10 @@
 type Query {
     """ AUTH """
-    login (username: String!, password: String!): LoginResponse,
+    login (username: String!, password: String!): LoginResponse
+
+    """ USERS """
+    loadAllStaffMembers: [User]
+
     """ ROLES """
     loadAllRoles: [Role]!
 
@@ -19,8 +23,8 @@ type Mutation {
     updateTreatment(id: String!): Treatment
     addTreatment(treatmentData: TreatmentInput!): Treatment
 
-
-
+    """PATIENT"""
+    addPatient(patient: PatientInput!): Patient!
 }
 
 

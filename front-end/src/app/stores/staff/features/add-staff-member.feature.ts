@@ -19,7 +19,7 @@ export function withAddStaffMember() {
       addStaffMember(staffVars: DemAddStaffMemberMutationVariables) {
         staffService.addStaffMember(staffVars).subscribe((staff) => {
           patchState(state, (state: any) => ({
-            treatments: [...state.treatments, staff],
+            staff: [...state.staff, staff],
           }));
         });
       },

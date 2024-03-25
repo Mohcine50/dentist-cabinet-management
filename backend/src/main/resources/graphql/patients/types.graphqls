@@ -1,0 +1,25 @@
+type Patient {
+id:ID,
+
+fullName:String,
+
+address:String,
+city:String,
+
+cin:String,
+phoneNumber:String,
+
+gender:String,
+
+otherPhoneNumber:String,
+
+treatments:[Treatment],
+
+createdBy:String,
+
+updatedBy:String,
+
+createdAt:String,
+
+updatedAt:String,
+}

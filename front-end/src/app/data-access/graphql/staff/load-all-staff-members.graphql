@@ -1,5 +1,5 @@
-mutation addStaffMember($staff: StaffInput!){
-    addStaffMember(staff: $staff){
+query loadAllStaffMembers{
+    loadAllStaffMembers{
         id
         profile{
             cin

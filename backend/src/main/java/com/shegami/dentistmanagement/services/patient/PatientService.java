@@ -6,11 +6,12 @@ import com.shegami.dentistmanagement.entities.Treatment;
 import java.util.List;
 
 public interface PatientService {
-    List<Patient> listAllTreatments();
+    List<Patient> listAllPatients();
 
-    Treatment getTreatmentById(String id);
+    Patient getPatientById(String id);
+    Patient addPatient(Patient patient);
 
-    Treatment deleteTreatmentById(String id);
+    void deletePatientById(String id);
 
-    Treatment updateTreatment(String id);
+    Patient updatePatient(Patient patient);
 }

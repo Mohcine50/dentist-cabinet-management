@@ -21,7 +21,7 @@ public class DentistManagementApplication {
 	}
 
 
-	@Bean()
+	//@Bean()
 	CommandLineRunner commandLineRunner(UserService accountService, RolesService rolesService, PasswordEncoder passwordEncoder) {
 
 		return args -> {
@@ -40,15 +40,15 @@ public class DentistManagementApplication {
 			rolesService.addNewRole(new Role(null, RoleEnum.INVOICE_VIEWER));
 
 			accountService.addNewUser(new AppUser(null, "admin", passwordEncoder.encode("123456789"),null,null, false));
-			accountService.addNewUser(new AppUser(null, "user",  passwordEncoder.encode("123456789"), null, null, true));
-			accountService.addNewUser(new AppUser(null, "manager",  passwordEncoder.encode("123456789"), null,null, false));
+			//accountService.addNewUser(new AppUser(null, "user",  passwordEncoder.encode("123456789"), null, null, true));
+			//accountService.addNewUser(new AppUser(null, "manager",  passwordEncoder.encode("123456789"), null,null, false));
 
 
 			accountService.addRoleToUser("admin", RoleEnum.ADMIN);
 			//accountService.addRoleToUser("admin", "USER");
 			accountService.addRoleToUser("admin", RoleEnum.MANAGER);
 			//accountService.addRoleToUser("user", "USER");
-			accountService.addRoleToUser("manager", RoleEnum.MANAGER);
+			//accountService.addRoleToUser("manager", RoleEnum.MANAGER);
 			//accountService.addRoleToUser("manager", "USER");
 
 		};

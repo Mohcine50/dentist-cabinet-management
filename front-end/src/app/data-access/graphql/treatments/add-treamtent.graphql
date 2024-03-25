@@ -11,6 +11,7 @@ mutation addTreatment($name: String!, $price: Int!, $duration: String!, $session
         sessions
         createdAt
         updatedAt
+        duration
         createdBy{
             username
         }

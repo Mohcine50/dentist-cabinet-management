@@ -5,6 +5,7 @@ type Treatment{
     sessions: Int,
     createdAt: String,
     updatedAt: String,
+    duration:String,
     createdBy: User,
     updatedBy: User,
 }

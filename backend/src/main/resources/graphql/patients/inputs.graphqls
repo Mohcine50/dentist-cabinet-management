@@ -1,14 +1,13 @@
-type Profile{
-    id: String,
+input PatientInput{
     fullName: String,
-    cin: String,
+    username: String,
+    cinNumber: String,
+    address: String,
     bio: String,
-    email: String,
     city: String,
     gender: String,
     phoneNumber: String,
     otherPhoneNumber: String,
-    updatedAt: String,
-    createdAt: String,
+    treatment: String,
+    role: String
 }
-

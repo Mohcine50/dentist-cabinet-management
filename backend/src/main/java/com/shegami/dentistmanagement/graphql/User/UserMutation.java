@@ -29,7 +29,6 @@ public class UserMutation {
 
     @MutationMapping
     public AppUser addStaffMember(@Argument StaffDto staff){
-        System.out.println(staff);
 
         Profile profile = profileService.createProfile(Profile.builder()
                 .fullName(staff.getFullName())

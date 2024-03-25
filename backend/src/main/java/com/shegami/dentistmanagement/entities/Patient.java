@@ -1,20 +1,27 @@
 package com.shegami.dentistmanagement.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Collection;
 import java.util.Date;
 
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "patients")
+@EntityListeners(AuditingEntityListener.class)
 public class Patient {
 
 
@@ -49,10 +56,12 @@ public class Patient {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "created_by")
+    @CreatedBy
     private AppUser createdBy;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "updated_by")
+    @LastModifiedBy
     private AppUser updatedBy;
 
     @CreatedDate

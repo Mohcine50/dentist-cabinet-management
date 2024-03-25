@@ -25,12 +25,19 @@ export type DemLoginResponse = {
 
 export type DemMutation = {
   __typename?: 'Mutation';
+  /** PATIENT */
+  addPatient: DemPatient;
   /** STAFF */
   addStaffMember?: Maybe<DemUser>;
   addTreatment?: Maybe<DemTreatment>;
   /** TREATMENTS */
   deleteTreatment: Scalars['String']['output'];
   updateTreatment?: Maybe<DemTreatment>;
+};
+
+
+export type DemMutationAddPatientArgs = {
+  patient: DemPatientInput;
 };
 
 
@@ -53,12 +60,44 @@ export type DemMutationUpdateTreatmentArgs = {
   id: Scalars['String']['input'];
 };
 
+export type DemPatient = {
+  __typename?: 'Patient';
+  address?: Maybe<Scalars['String']['output']>;
+  cin?: Maybe<Scalars['String']['output']>;
+  city?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['String']['output']>;
+  createdBy?: Maybe<Scalars['String']['output']>;
+  fullName?: Maybe<Scalars['String']['output']>;
+  gender?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  otherPhoneNumber?: Maybe<Scalars['String']['output']>;
+  phoneNumber?: Maybe<Scalars['String']['output']>;
+  treatments?: Maybe<Array<Maybe<DemTreatment>>>;
+  updatedAt?: Maybe<Scalars['String']['output']>;
+  updatedBy?: Maybe<Scalars['String']['output']>;
+};
+
+export type DemPatientInput = {
+  address?: InputMaybe<Scalars['String']['input']>;
+  bio?: InputMaybe<Scalars['String']['input']>;
+  cinNumber?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  fullName?: InputMaybe<Scalars['String']['input']>;
+  gender?: InputMaybe<Scalars['String']['input']>;
+  otherPhoneNumber?: InputMaybe<Scalars['String']['input']>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  treatment?: InputMaybe<Scalars['String']['input']>;
+  username?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type DemProfile = {
   __typename?: 'Profile';
   bio?: Maybe<Scalars['String']['output']>;
   cin?: Maybe<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
   fullName?: Maybe<Scalars['String']['output']>;
   gender?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
@@ -72,6 +111,8 @@ export type DemQuery = {
   getTreatmentById?: Maybe<DemTreatment>;
   /**  ROLES  */
   loadAllRoles: Array<Maybe<DemRole>>;
+  /**  USERS  */
+  loadAllStaffMembers?: Maybe<Array<Maybe<DemUser>>>;
   /** TREATMENTS */
   loadAllTreatments?: Maybe<Array<Maybe<DemTreatment>>>;
   /**  AUTH  */
@@ -119,6 +160,7 @@ export type DemTreatment = {
   __typename?: 'Treatment';
   createdAt?: Maybe<Scalars['String']['output']>;
   createdBy?: Maybe<DemUser>;
+  duration?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   price?: Maybe<Scalars['Int']['output']>;
@@ -136,10 +178,11 @@ export type DemTreatmentInput = {
 
 export type DemUser = {
   __typename?: 'User';
-  email?: Maybe<Scalars['String']['output']>;
+  firstLoginTime?: Maybe<Scalars['Boolean']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   password?: Maybe<Scalars['String']['output']>;
   profile?: Maybe<DemProfile>;
+  roles?: Maybe<Array<Maybe<DemRole>>>;
   username?: Maybe<Scalars['String']['output']>;
 };
 
@@ -161,7 +204,12 @@ export type DemAddStaffMemberMutationVariables = Exact<{
 }>;
 
 
-export type DemAddStaffMemberMutation = { __typename?: 'Mutation', addStaffMember?: { __typename?: 'User', id?: string | null | undefined, username?: string | null | undefined, password?: string | null | undefined, profile?: { __typename?: 'Profile', cin?: string | null | undefined, phoneNumber?: string | null | undefined, otherPhoneNumber?: string | null | undefined, createdAt?: string | null | undefined, city?: string | null | undefined, fullName?: string | null | undefined, gender?: string | null | undefined, id?: string | null | undefined, bio?: string | null | undefined } | null | undefined } | null | undefined };
+export type DemAddStaffMemberMutation = { __typename?: 'Mutation', addStaffMember?: { __typename?: 'User', id?: string | null | undefined, username?: string | null | undefined, profile?: { __typename?: 'Profile', cin?: string | null | undefined, id?: string | null | undefined, phoneNumber?: string | null | undefined, fullName?: string | null | undefined, otherPhoneNumber?: string | null | undefined, city?: string | null | undefined, createdAt?: string | null | undefined, bio?: string | null | undefined, email?: string | null | undefined, updatedAt?: string | null | undefined } | null | undefined, roles?: Array<{ __typename?: 'Role', name?: string | null | undefined, id?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+
+export type DemLoadAllStaffMembersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DemLoadAllStaffMembersQuery = { __typename?: 'Query', loadAllStaffMembers?: Array<{ __typename?: 'User', id?: string | null | undefined, username?: string | null | undefined, profile?: { __typename?: 'Profile', cin?: string | null | undefined, id?: string | null | undefined, phoneNumber?: string | null | undefined, fullName?: string | null | undefined, otherPhoneNumber?: string | null | undefined, city?: string | null | undefined, createdAt?: string | null | undefined, bio?: string | null | undefined, email?: string | null | undefined, updatedAt?: string | null | undefined } | null | undefined, roles?: Array<{ __typename?: 'Role', name?: string | null | undefined, id?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
 
 export type DemAddTreatmentMutationVariables = Exact<{
   name: Scalars['String']['input'];
@@ -171,7 +219,7 @@ export type DemAddTreatmentMutationVariables = Exact<{
 }>;
 
 
-export type DemAddTreatmentMutation = { __typename?: 'Mutation', addTreatment?: { __typename?: 'Treatment', name?: string | null | undefined, id?: string | null | undefined, price?: number | null | undefined, sessions?: number | null | undefined, createdAt?: string | null | undefined, updatedAt?: string | null | undefined, createdBy?: { __typename?: 'User', username?: string | null | undefined } | null | undefined, updatedBy?: { __typename?: 'User', username?: string | null | undefined } | null | undefined } | null | undefined };
+export type DemAddTreatmentMutation = { __typename?: 'Mutation', addTreatment?: { __typename?: 'Treatment', name?: string | null | undefined, id?: string | null | undefined, price?: number | null | undefined, sessions?: number | null | undefined, createdAt?: string | null | undefined, updatedAt?: string | null | undefined, duration?: string | null | undefined, createdBy?: { __typename?: 'User', username?: string | null | undefined } | null | undefined, updatedBy?: { __typename?: 'User', username?: string | null | undefined } | null | undefined } | null | undefined };
 
 export type DemLoadAllTreatmentsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -220,19 +268,25 @@ export const AddStaffMemberDocument = gql`
     mutation addStaffMember($staff: StaffInput!) {
   addStaffMember(staff: $staff) {
     id
-    username
-    password
     profile {
       cin
+      id
+      phoneNumber
+      fullName
       phoneNumber
       otherPhoneNumber
-      createdAt
+      cin
       city
-      fullName
-      gender
-      id
+      createdAt
       bio
+      email
+      updatedAt
     }
+    roles {
+      name
+      id
+    }
+    username
   }
 }
     `;
@@ -242,6 +296,43 @@ export const AddStaffMemberDocument = gql`
   })
   export class DemAddStaffMemberGQL extends Apollo.Mutation<DemAddStaffMemberMutation, DemAddStaffMemberMutationVariables> {
     override document = AddStaffMemberDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const LoadAllStaffMembersDocument = gql`
+    query loadAllStaffMembers {
+  loadAllStaffMembers {
+    id
+    profile {
+      cin
+      id
+      phoneNumber
+      fullName
+      phoneNumber
+      otherPhoneNumber
+      cin
+      city
+      createdAt
+      bio
+      email
+      updatedAt
+    }
+    roles {
+      name
+      id
+    }
+    username
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DemLoadAllStaffMembersGQL extends Apollo.Query<DemLoadAllStaffMembersQuery, DemLoadAllStaffMembersQueryVariables> {
+    override document = LoadAllStaffMembersDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -258,6 +349,7 @@ export const AddTreatmentDocument = gql`
     sessions
     createdAt
     updatedAt
+    duration
     createdBy {
       username
     }

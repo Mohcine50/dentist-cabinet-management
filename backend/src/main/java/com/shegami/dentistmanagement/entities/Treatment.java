@@ -24,7 +24,6 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public class Treatment {
 
-    //@EnableJpaAuditing for automatic time insertion time
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

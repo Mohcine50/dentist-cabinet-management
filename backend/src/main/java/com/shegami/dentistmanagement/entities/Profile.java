@@ -7,9 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 
 @Entity
@@ -18,6 +23,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @Builder
 @Table(name = "profiles")
+@EntityListeners(AuditingEntityListener.class)
 public class Profile {
 
 
@@ -50,5 +56,19 @@ public class Profile {
     @Column(nullable = false, name = "email")
     private String email;
 
+    @Column(nullable = true, name = "image")
+    private String imageLink;
+
+    @CreatedDate
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "created_at", nullable = false)
+    private Date createdAt;
+
+    @LastModifiedDate()
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "updated_at")
+    private Date updatedAt;
 
 }

@@ -5,6 +5,8 @@ import {
   DemAddStaffMemberGQL,
   DemAddStaffMemberMutation,
   DemAddStaffMemberMutationVariables,
+  DemLoadAllStaffMembersGQL,
+  DemLoadAllStaffMembersQuery,
   DemStaffInput,
 } from '../../data-access/generated/generated';
 import { map } from 'rxjs';
@@ -13,7 +15,10 @@ import { map } from 'rxjs';
   providedIn: 'root',
 })
 export class StaffService {
-  constructor(private addStaffMemberMutation: DemAddStaffMemberGQL) {}
+  constructor(
+    private addStaffMemberMutation: DemAddStaffMemberGQL,
+    private loadAllMembers: DemLoadAllStaffMembersGQL
+  ) {}
 
   addStaffMember(
     staff: DemAddStaffMemberMutationVariables
@@ -23,26 +28,13 @@ export class StaffService {
       .pipe(map((res) => res.data?.addStaffMember));
   }
 
-  loadAllStaffMembers(): Observable<any> {
-    return of([
-      {
-        name: 'mohcine',
-        address: 'zemamra',
-        cinNumber: 'MD8J3E',
-        phoneNumber: '+2126728928',
-      },
-      {
-        name: 'mohamed',
-        address: 'zemamra',
-        cinNumber: 'MD8SXE',
-        phoneNumber: '+2126728928',
-      },
-      {
-        name: 'rachid',
-        address: 'zemamra',
-        cinNumber: 'MD8J3E',
-        phoneNumber: '+2126728928',
-      },
-    ]);
+  loadAllStaffMembers(): Observable<
+    DemLoadAllStaffMembersQuery['loadAllStaffMembers']
+  > {
+    return this.loadAllMembers
+      .fetch(undefined, {
+        fetchPolicy: 'no-cache',
+      })
+      .pipe(map((res) => res.data.loadAllStaffMembers));
   }
 }

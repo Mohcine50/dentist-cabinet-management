@@ -3,12 +3,10 @@
   <button (click)="addTreatmentForm()" class="dem-btn">Add Treatment</button>
 </div>
 
-<div class="grid grid-cols-3 gap-4 mt-4">
-
+<div class="grid grid-cols-4 gap-4 mt-4">
   @for (treatment of treatmentsStore.treatments(); track treatment) {
     <dem-treatment [treatment]="treatment" />
   }
-
 </div>
 
 <dem-right-slider #rightSliderComponent title="Add Treatment">

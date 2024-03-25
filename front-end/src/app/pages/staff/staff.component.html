@@ -4,8 +4,69 @@
 </div>
 
 <div class="">
-  <dem-data-table (editEvent)="editStaff($event)" [showImage]="true"
-                  [tableData]="staffStore.staff()" [tableHeader]="staffDataTableHeader" />
+
+  <table>
+    <thead>
+    <tr>
+      <th class="">Full Name</th>
+      <th class="">Contact</th>
+      <th class="">Username</th>
+      <th class="">Role</th>
+      <th class="!max-w-10"></th>
+    </tr>
+    </thead>
+    <tbody>
+      @if (staffStore.staff() && staffStore.staff().length > 0) {
+        @for (staff of staffStore.staff(); let i = $index; track staff.id) {
+          <tr>
+            @if (staff['profile']) {
+              <td>
+                @if (i === 0) {
+                  <div class="flex items-center gap-2">
+                    <img
+                      [src]="'https://api.dicebear.com/8.x/initials/svg?radius=50&size=32&fontSize=44&seed=' + staff['profile']['fullName'] "
+                      alt="avatar"
+                    />
+                    <h4>{{ staff['profile']['fullName'] }}</h4>
+                  </div>
+                } @else {
+                  <h4>{{ staff['profile']['fullName'] }}</h4>
+                }
+
+              </td>
+
+              <td class="flex flex-col gap-1.5">
+              <span
+                class="inline-block">{{ staff['profile']['email'] }}</span>
+                <span
+                  class="inline-block">{{ staff['profile']['phoneNumber'] }}</span>
+              </td>
+            }
+            <td>{{ staff['username'] }}</td>
+            @if (staff['roles'].length > 0) {
+              <td>{{ staff['roles'][0]['name'] }}</td>
+            }
+
+            <td class="flex gap-4 items-center justify-end h-full">
+            <span
+              class="!text-main-green  font-medium cursor-pointer block">View</span>
+              <span
+                class="!text-main-blue  font-medium cursor-pointer block">Edit</span>
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+    @if (staffStore.staff().length === 0) {
+      <tfoot>
+      <tr class="bg-white py-4">
+        <td class="w-full text-center font-medium text-gray-600 text-sm py-4" [colSpan]="5">
+          You don't have any staff members
+        </td>
+      </tr>
+      </tfoot>
+    }
+  </table>
 </div>
 
 

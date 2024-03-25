@@ -79,7 +79,6 @@ export class SingleSelectInputComponent
 
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
-    console.log(isDisabled);
   }
 
   toggleDropdown() {

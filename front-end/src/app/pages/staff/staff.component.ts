@@ -31,10 +31,6 @@ export class StaffComponent implements OnInit {
 
   constructor() {}
 
-  get staffDataTableHeader() {
-    return Object.keys(this.staffStore.staff()[0]);
-  }
-
   ngOnInit() {
     this.staffStore.loadStaffMembers();
   }
