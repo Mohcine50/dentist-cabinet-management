@@ -18,14 +18,9 @@ public class TreatmentsMutation {
 
     private final TreatmentService treatmentService;
 
-    private final UserService userService;
 
     @MutationMapping()
     public Treatment addTreatment(@Argument TreatmentDto treatmentData){
-
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        AppUser user = userService.loadUserByUsername(authentication.getName());
 
 
         Treatment treatment = Treatment.builder()
@@ -33,7 +28,6 @@ public class TreatmentsMutation {
                 .name(treatmentData.getName())
                 .sessions(treatmentData.getSessions())
                 .duration(treatmentData.getDuration())
-                .createdBy(user)
                 .build();
 
         return treatmentService.addTreatment(treatment);
