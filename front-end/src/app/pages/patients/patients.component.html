@@ -3,10 +3,58 @@
   <button (click)="addPatientForm()" class="dem-btn">Add Patient</button>
 </div>
 
-<div>
-  @for (patient of patientStore.patients(); track patient) {
-    <div>{{ patient.fullName }}</div>
-  }
+<div class="">
+  <table>
+    <thead>
+    <tr>
+      <th class="">Full Name</th>
+      <th class="">Contact</th>
+      <th class="">Gender</th>
+      <th class="">City</th>
+      <th class="!max-w-10"></th>
+    </tr>
+    </thead>
+    <tbody>
+      @if (patientStore.patients() && patientStore.patients().length > 0) {
+        @for (patient of patientStore.patients(); track patient.id) {
+          <tr>
+            <td>
+              <div class="flex items-center gap-2">
+                <img
+                  [src]="'https://api.dicebear.com/8.x/initials/svg?radius=50&size=32&fontSize=44&seed=' + patient['fullName'] "
+                  alt="avatar"
+                />
+                <h4>{{ patient['fullName'] }}</h4>
+              </div>
+            </td>
+
+            <td>
+              {{ patient['phoneNumber'] }}
+            </td>
+
+            <td>{{ patient['gender'] }}</td>
+            <td>{{ patient['city'] }}</td>
+
+            <td class="flex gap-4 items-center justify-end h-full">
+            <span
+              class="!text-main-green  font-medium cursor-pointer block">View</span>
+              <span
+                class="!text-main-blue  font-medium cursor-pointer block">Edit</span>
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+    @if (patientStore.patients().length === 0) {
+      <tfoot>
+      <tr class="bg-white py-4">
+        <td class="w-full text-center font-medium text-gray-600 text-sm py-4" [colSpan]="5">
+          No patients to show
+        </td>
+      </tr>
+      </tfoot>
+    }
+  </table>
 </div>
 
 <dem-right-slider #rightSliderComponent title="Add Patient">
