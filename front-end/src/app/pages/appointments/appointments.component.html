@@ -5,7 +5,7 @@
     <li><a [queryParams]="{view: 'calendar', filter:'monthly'}" [routerLinkActive]="['text-main-blue']"
            [routerLink]="['/appointments-management']">Calendar View</a></li>
   </ul>
-  <button class="dem-btn">Create Session</button>
+  <button (click)="addAppointment()" class="dem-btn">Create Session</button>
 </div>
 
 <div class="grow flex gap-4">
@@ -23,3 +23,8 @@
     <dem-list-view />
   }
 </div>
+
+
+<dem-right-slider #rightSliderComponent title="Add Appointment">
+  <dem-add-appointment (event)="addAppointment()" />
+</dem-right-slider>

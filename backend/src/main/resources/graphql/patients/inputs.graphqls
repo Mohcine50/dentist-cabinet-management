@@ -7,5 +7,4 @@ input PatientInput{
     gender: String,
     phoneNumber: String,
     otherPhoneNumber: String,
-    treatment: String,
 }

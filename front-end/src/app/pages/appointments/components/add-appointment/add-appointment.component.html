@@ -1,0 +1,27 @@
+<form (ngSubmit)="addAppointment($event)" [formGroup]="appointmentForm" class="flex flex-col gap-3">
+  <dem-single-select-input
+    [formControl]="patient"
+    [options]="patientsStore.patients()"
+    label="fullName"
+    optionValue="id"
+    title="Patients" />
+  <dem-single-select-input
+    [formControl]="treatment"
+    [options]="treatmentsStore.treatments()"
+    label="name"
+    optionValue="id"
+    title="Treatments" />
+  <dem-single-select-input
+    [formControl]="status"
+    [options]="['Scheduled', 'Cancelled', 'Completed', 'Rescheduled']"
+    title="Status"
+  />
+  <input [formControl]="startTime" class="dem-input" name="startTime" placeholder="Start Time" type="time" />
+  <input [formControl]="date" class="dem-input" min="1" name="date" placeholder="Date" type="date" />
+  <textarea [formControl]="notes" class="dem-input" min="1" name="notes" placeholder="Notes" type="number"></textarea>
+  <div class="flex items-center justify-end gap-3 mt-5">
+    <button class="dem-btn dem-btn-trp" type="reset">Cancel</button>
+    <button class="dem-btn" type="submit">Add Appointment</button>
+  </div>
+</form>
+

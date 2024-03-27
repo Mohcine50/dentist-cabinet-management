@@ -4,14 +4,14 @@ import {
   inject,
   Input,
   OnInit,
-  Output,
+  Output
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { SingleSelectInputComponent } from '../../../shared/components/singleSelectInput/single-select-input.component';
 import { PatientsStore } from '../../../stores/patients/patients.store';
@@ -22,12 +22,11 @@ import { TreatmentsStore } from '../../../stores/treatments/treatments.store';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, SingleSelectInputComponent],
   templateUrl: './add-patient.component.html',
-  styleUrl: './add-patient.component.scss',
+  styleUrl: './add-patient.component.scss'
 })
 export class AddPatientComponent implements OnInit {
   @Output() event = new EventEmitter<void>();
   protected patientStore = inject(PatientsStore);
-  protected treatmentStore = inject(TreatmentsStore);
   protected patientForm!: FormGroup;
   protected fullName = new FormControl('', [Validators.required]);
   protected bio = new FormControl('', [Validators.required]);
@@ -37,7 +36,6 @@ export class AddPatientComponent implements OnInit {
   protected city = new FormControl('', [Validators.required]);
   protected otherPhoneNumber = new FormControl('', [Validators.required]);
   protected cinNumber = new FormControl('', [Validators.required]);
-  protected treatment = new FormControl('', [Validators.required]);
 
   ngOnInit(): void {
     this.patientForm = new FormGroup({
@@ -48,15 +46,14 @@ export class AddPatientComponent implements OnInit {
       address: this.address,
       city: this.city,
       otherPhoneNumber: this.otherPhoneNumber,
-      cinNumber: this.cinNumber,
-      treatment: this.treatment,
+      cinNumber: this.cinNumber
     });
   }
 
   addPatientForm(event: Event) {
     event.preventDefault();
     this.patientStore.addPatient({
-      patient: this.patientForm.value,
+      patient: this.patientForm.value
     });
     this.event.emit();
   }

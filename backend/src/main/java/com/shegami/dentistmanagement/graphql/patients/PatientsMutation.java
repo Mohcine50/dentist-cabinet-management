@@ -18,15 +18,10 @@ import java.util.List;
 public class PatientsMutation {
 
     private final PatientService patientService;
-    private final TreatmentService treatmentService;
 
     @MutationMapping()
     public Patient addPatient(@Argument PatientDto patient){
 
-
-        Treatment treatment = treatmentService.getTreatmentById(patient.getTreatment());
-
-        //TODO: need to check if there is a treatment first if null handle it *_*
 
         Patient newPatient = Patient.builder()
                 .cinNumber(patient.getCinNumber())
@@ -37,7 +32,7 @@ public class PatientsMutation {
                 .fullName(patient.getFullName())
                 .otherPhoneNumber(patient.getOtherPhoneNumber())
                 .phoneNumber(patient.getOtherPhoneNumber())
-                .treatments(List.of(treatment))
+                .treatments(null)
                 .build();
 
     return patientService.addPatient(newPatient);

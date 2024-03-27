@@ -86,7 +86,6 @@ export type DemPatientInput = {
   gender?: InputMaybe<Scalars['String']['input']>;
   otherPhoneNumber?: InputMaybe<Scalars['String']['input']>;
   phoneNumber?: InputMaybe<Scalars['String']['input']>;
-  treatment?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DemProfile = {

@@ -1,0 +1,14 @@
+type Appointment {
+    id: ID!
+    patient: Patient!
+    date: String!
+    startTime: String!
+    status: String!
+    treatment: Treatment!
+    notes: String
+    createdAt: String!
+    updatedAt: String
+    createdBy: User!
+    updatedBy: User!
+
+}

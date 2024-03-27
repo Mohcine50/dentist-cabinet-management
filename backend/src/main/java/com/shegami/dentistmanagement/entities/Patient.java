@@ -11,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -52,7 +53,10 @@ public class Patient {
     private String otherPhoneNumber;
 
     @ManyToMany()
-    private Collection<Treatment> treatments;
+    private Collection<Treatment> treatments = new ArrayList<>();
+
+    @ManyToMany()
+    private Collection<Appointment> appointments = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "created_by")

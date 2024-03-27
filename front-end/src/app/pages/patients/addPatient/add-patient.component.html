@@ -9,13 +9,6 @@
   <input [formControl]="city" class="dem-input" name="city" placeholder="City" type="text" />
   <input [formControl]="cinNumber" class="dem-input" name="cinNumber" placeholder="CIN Number" type="text" />
   <dem-single-select-input
-    [formControl]="treatment"
-    [options]="treatmentStore.treatments()"
-    label="name"
-    optionValue="id"
-    title="Treatment"
-  />
-  <dem-single-select-input
     [formControl]="gender"
     [options]="['Male', 'Female']"
     title="Gender"

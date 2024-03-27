@@ -13,8 +13,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -49,6 +51,9 @@ public class Treatment {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "updated_by")
     private AppUser updatedBy;
+
+    @OneToMany(mappedBy = "treatment")
+    private Collection<Appointment> appointments = new ArrayList<>();
 
     @CreatedDate
     @DateTimeFormat(pattern = "dd/MM/yyyy")

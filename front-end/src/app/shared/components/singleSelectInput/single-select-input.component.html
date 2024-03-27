@@ -9,7 +9,7 @@
   </div>
   @if (isOpen) {
     <ul
-      class="mb-2 bottom-full absolute bg-white left-0 right-0 ring-1 ring-gray-100 rounded-md border-collapse max-h-[140px] overflow-y-scroll shadow-md">
+      class="mb-2 top-full z-50 absolute bg-white left-0 right-0 ring-1 ring-gray-100 rounded-md border-collapse max-h-[140px] overflow-y-scroll shadow-md">
       @for (option of options; track option) {
         <li (click)="onOptionClick(option)"
             [class.bg-gray-100]="isSelected(label ? option[label] : option)"

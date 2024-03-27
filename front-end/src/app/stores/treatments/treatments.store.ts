@@ -26,7 +26,7 @@ const initialState: TreatmentsState = {
 
 export const TreatmentsStore = signalStore(
   { providedIn: 'root' },
-  //withLoadAllTreatments(),
+  withLoadAllTreatments(),
   withAddTreatment(),
   withHooks({
     onInit(store, treatmentService = inject(TreatmentsService)) {
