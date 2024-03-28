@@ -17,6 +17,31 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type DemAppointment = {
+  __typename?: 'Appointment';
+  createdAt: Scalars['String']['output'];
+  createdBy: DemUser;
+  date: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  notes?: Maybe<Scalars['String']['output']>;
+  patient: DemPatient;
+  startTime: Scalars['String']['output'];
+  status: Scalars['String']['output'];
+  treatment: DemTreatment;
+  updatedAt?: Maybe<Scalars['String']['output']>;
+  updatedBy: DemUser;
+};
+
+export type DemAppointmentInput = {
+  date: Scalars['String']['input'];
+  endTime: Scalars['String']['input'];
+  notes?: InputMaybe<Scalars['String']['input']>;
+  patient: Scalars['String']['input'];
+  startTime: Scalars['String']['input'];
+  status: Scalars['String']['input'];
+  treatment: Scalars['String']['input'];
+};
+
 export type DemLoginResponse = {
   __typename?: 'LoginResponse';
   accessToken?: Maybe<Scalars['String']['output']>;
@@ -25,6 +50,8 @@ export type DemLoginResponse = {
 
 export type DemMutation = {
   __typename?: 'Mutation';
+  /** APPOINTMENTS */
+  addAppointment: DemAppointment;
   /** PATIENT */
   addPatient: DemPatient;
   /** STAFF */
@@ -33,6 +60,11 @@ export type DemMutation = {
   /** TREATMENTS */
   deleteTreatment: Scalars['String']['output'];
   updateTreatment?: Maybe<DemTreatment>;
+};
+
+
+export type DemMutationAddAppointmentArgs = {
+  appointment: DemAppointmentInput;
 };
 
 
@@ -106,6 +138,8 @@ export type DemProfile = {
 export type DemQuery = {
   __typename?: 'Query';
   getTreatmentById?: Maybe<DemTreatment>;
+  /** APPOINTMENTS */
+  loadAllAppointments?: Maybe<Array<Maybe<DemAppointment>>>;
   /** PATIENT */
   loadAllPatients?: Maybe<Array<Maybe<DemPatient>>>;
   /**  ROLES  */
@@ -185,6 +219,18 @@ export type DemUser = {
   username?: Maybe<Scalars['String']['output']>;
 };
 
+export type DemAddAppointmentMutationVariables = Exact<{
+  appointment: DemAppointmentInput;
+}>;
+
+
+export type DemAddAppointmentMutation = { __typename?: 'Mutation', addAppointment: { __typename?: 'Appointment', id: string, updatedAt?: string | null | undefined, createdAt: string, notes?: string | null | undefined, status: string, startTime: string, date: string, updatedBy: { __typename?: 'User', id?: string | null | undefined, username?: string | null | undefined }, createdBy: { __typename?: 'User', id?: string | null | undefined, username?: string | null | undefined }, patient: { __typename?: 'Patient', fullName?: string | null | undefined, id?: string | null | undefined }, treatment: { __typename?: 'Treatment', name?: string | null | undefined, id?: string | null | undefined } } };
+
+export type DemLoadAllAppointmentsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DemLoadAllAppointmentsQuery = { __typename?: 'Query', loadAllAppointments?: Array<{ __typename?: 'Appointment', id: string, updatedAt?: string | null | undefined, createdAt: string, notes?: string | null | undefined, status: string, startTime: string, date: string, updatedBy: { __typename?: 'User', id?: string | null | undefined, username?: string | null | undefined }, createdBy: { __typename?: 'User', id?: string | null | undefined, username?: string | null | undefined }, patient: { __typename?: 'Patient', fullName?: string | null | undefined, id?: string | null | undefined }, treatment: { __typename?: 'Treatment', name?: string | null | undefined, id?: string | null | undefined } } | null | undefined> | null | undefined };
+
 export type DemLoginQueryVariables = Exact<{
   password: Scalars['String']['input'];
   username: Scalars['String']['input'];
@@ -237,6 +283,86 @@ export type DemLoadAllTreatmentsQueryVariables = Exact<{ [key: string]: never; }
 
 export type DemLoadAllTreatmentsQuery = { __typename?: 'Query', loadAllTreatments?: Array<{ __typename?: 'Treatment', name?: string | null | undefined, id?: string | null | undefined, price?: number | null | undefined, sessions?: number | null | undefined, updatedAt?: string | null | undefined, createdAt?: string | null | undefined, createdBy?: { __typename?: 'User', username?: string | null | undefined } | null | undefined, updatedBy?: { __typename?: 'User', username?: string | null | undefined } | null | undefined } | null | undefined> | null | undefined };
 
+export const AddAppointmentDocument = gql`
+    mutation addAppointment($appointment: AppointmentInput!) {
+  addAppointment(appointment: $appointment) {
+    updatedBy {
+      id
+      username
+    }
+    id
+    updatedAt
+    createdAt
+    createdBy {
+      id
+      username
+    }
+    patient {
+      fullName
+      id
+    }
+    notes
+    status
+    startTime
+    date
+    treatment {
+      name
+      id
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DemAddAppointmentGQL extends Apollo.Mutation<DemAddAppointmentMutation, DemAddAppointmentMutationVariables> {
+    override document = AddAppointmentDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const LoadAllAppointmentsDocument = gql`
+    query loadAllAppointments {
+  loadAllAppointments {
+    updatedBy {
+      id
+      username
+    }
+    id
+    updatedAt
+    createdAt
+    createdBy {
+      id
+      username
+    }
+    patient {
+      fullName
+      id
+    }
+    notes
+    status
+    startTime
+    date
+    treatment {
+      name
+      id
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DemLoadAllAppointmentsGQL extends Apollo.Query<DemLoadAllAppointmentsQuery, DemLoadAllAppointmentsQueryVariables> {
+    override document = LoadAllAppointmentsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const LoginDocument = gql`
     query login($password: String!, $username: String!) {
   login(password: $password, username: $username) {

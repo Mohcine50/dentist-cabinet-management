@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { AppointmentCalendarComponent } from './components/appointment-calendar/appointment-calendar.component';
 import {
   ActivatedRoute,
@@ -14,6 +14,7 @@ import { UpcomingSessionCardComponent } from './components/upcoming-session-card
 import { AddTreatmentComponent } from '../treatments/addTreatment/add-treatment.component';
 import { RightSliderComponent } from '../../shared/components/rightSlider/rightSlider.component';
 import { AddAppointmentComponent } from './components/add-appointment/add-appointment.component';
+import { AppointmentsStore } from '../../stores/appointments/appointments.store';
 
 @Component({
   selector: 'dem-appointment',
@@ -32,9 +33,11 @@ import { AddAppointmentComponent } from './components/add-appointment/add-appoin
   ],
   templateUrl: './appointments.component.html',
   styleUrl: './appointments.component.scss',
+  providers: [AppointmentsStore],
 })
 export class AppointmentComponent implements OnInit {
   view!: string | null;
+  appointmentsStore = inject(AppointmentsStore);
   @ViewChild('rightSliderComponent')
   protected rightSliderComponent!: RightSliderComponent;
 
@@ -44,6 +47,9 @@ export class AppointmentComponent implements OnInit {
     this.route.queryParamMap.subscribe((value) => {
       this.view = value.get('view');
     });
+
+    this.appointmentsStore.loadAllAllAppointments();
+    console.log(this.appointmentsStore.appointments());
   }
 
   addAppointment() {

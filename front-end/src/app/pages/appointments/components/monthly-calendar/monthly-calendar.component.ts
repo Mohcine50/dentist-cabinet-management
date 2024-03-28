@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  inject,
   OnChanges,
   OnInit,
   SimpleChanges,
@@ -15,6 +16,7 @@ import {
   endOfMonth,
   endOfWeek,
   format,
+  isSameDay,
   isThisMonth,
   isToday,
   parse,
@@ -23,6 +25,7 @@ import {
   startOfWeek,
   sub,
 } from 'date-fns';
+import { AppointmentsStore } from '../../../../stores/appointments/appointments.store';
 
 @Component({
   selector: 'dem-monthly-calendar',
@@ -38,6 +41,8 @@ export class MonthlyCalendarComponent implements OnInit {
   weekDays = Array.from(Array(7)).map((e, i) =>
     format(addDays(this.firstDayOfWeek, i), 'EEEE')
   );
+  appointmentsStore = inject(AppointmentsStore);
+  appointments = this.appointmentsStore.appointments();
   protected readonly isToday = isToday;
   protected readonly isThisMonth = isThisMonth;
 
@@ -64,6 +69,12 @@ export class MonthlyCalendarComponent implements OnInit {
   previousMonth() {
     const nextMonth = sub(this.firstDayOfCurrentMonth, { months: 1 });
     this.selectedMonth = format(nextMonth, 'LLLL yyyy');
+  }
+
+  byDayAppointment(day: any) {
+    return this.appointments.filter((appointment) =>
+      isSameDay(day, appointment['date'])
+    );
   }
 
   ngOnInit(): void {}

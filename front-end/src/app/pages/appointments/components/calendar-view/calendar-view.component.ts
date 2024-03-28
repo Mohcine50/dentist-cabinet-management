@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ActivatedRoute,
@@ -8,6 +8,7 @@ import {
 import { MonthlyCalendarComponent } from '../monthly-calendar/monthly-calendar.component';
 import { DailyCalendarComponent } from '../daily-calendar/daily-calendar.component';
 import { WeeklyCalendarComponent } from '../weekly-calendar/weekly-calendar.component';
+import { AppointmentsStore } from '../../../../stores/appointments/appointments.store';
 
 @Component({
   selector: 'dem-calendar-view',

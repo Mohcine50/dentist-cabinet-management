@@ -9,6 +9,7 @@ import {
 import { TreatmentsStore } from '../../../../stores/treatments/treatments.store';
 import { SingleSelectInputComponent } from '../../../../shared/components/singleSelectInput/single-select-input.component';
 import { PatientsStore } from '../../../../stores/patients/patients.store';
+import { AppointmentsStore } from '../../../../stores/appointments/appointments.store';
 
 @Component({
   selector: 'dem-add-appointment',
@@ -22,7 +23,7 @@ export class AddAppointmentComponent implements OnInit {
 
   treatmentsStore = inject(TreatmentsStore);
   patientsStore = inject(PatientsStore);
-
+  appointmentsStore = inject(AppointmentsStore);
   protected appointmentForm!: FormGroup;
   protected startTime = new FormControl('', [Validators.required]);
   protected date = new FormControl('', [Validators.required]);
@@ -46,7 +47,9 @@ export class AddAppointmentComponent implements OnInit {
 
   addAppointment(event: Event) {
     event.preventDefault();
-    console.log(this.appointmentForm.value);
+    this.appointmentsStore.addAppointment({
+      appointment: this.appointmentForm.value,
+    });
     this.event.emit();
   }
 }

@@ -1,7 +1,6 @@
 input AppointmentInput {
     date: String!
     startTime: String!
-    endTime: String!
     status: String!
     notes: String
     treatment: String!

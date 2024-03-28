@@ -14,8 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class AppointmentsQuery {
     private final AppointmentService appointmentService;
-
-
     @QueryMapping
     public List<Appointment> loadAllAppointments(){
         return appointmentService.listAllAppointment();

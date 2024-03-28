@@ -13,7 +13,43 @@
   </button>
 </div>
 
-<dem-data-table
-  [tableData]="tableData"
-  [tableHeader]="patientTableHeader"
-/>
+<table>
+  <thead>
+  <tr>
+    @for (header of patientTableHeader; let i = $index; track i) {
+      <th class="">{{ header }}</th>
+    }
+    <th class="!max-w-10"></th>
+  </tr>
+  </thead>
+  <tbody>
+    @if (appointmentsStore.appointments()) {
+      @for (appointment of appointmentsStore.appointments(); let i = $index; track i) {
+        <tr>
+          <td>
+            <div class="flex items-center gap-2">
+              <img
+                [src]="'https://api.dicebear.com/8.x/initials/svg?radius=50&size=32&fontSize=44&seed=' + appointment['patient']['fullName']"
+                alt="avatar"
+              />
+              <h4>{{ appointment['patient']['fullName'] }}</h4>
+            </div>
+          </td>
+          <td>{{ appointment['treatment']['name'] }}</td>
+          <td>{{ appointment['startTime'] }} | {{ appointment['date'] | date: 'EEEE dd, YYYY' }}</td>
+          <td>{{ appointment['status'] }}</td>
+
+          <td class="flex gap-4 items-center justify-end">
+            <span
+              class="!text-main-green  font-medium cursor-pointer inline-block">View</span>
+            <span
+              class="!text-main-blue  font-medium cursor-pointer inline-block">Edit</span>
+          </td>
+
+
+        </tr>
+      }
+    }
+
+  </tbody>
+</table>

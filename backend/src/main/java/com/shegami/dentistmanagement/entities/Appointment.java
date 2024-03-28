@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "appointments")
+@EntityListeners(AuditingEntityListener.class)
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

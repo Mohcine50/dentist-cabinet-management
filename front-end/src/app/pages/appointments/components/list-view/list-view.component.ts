@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DataTableComponent } from '../../../../shared/components/dataTable/data-table.component';
+import { AppointmentsStore } from '../../../../stores/appointments/appointments.store';
 
 @Component({
   selector: 'dem-list-view',
@@ -18,12 +19,5 @@ export class ListViewComponent {
     'Status',
   ];
 
-  tableData = [
-    {
-      'Full Name': 'Mohcine Lahnin',
-      Treatment: 'Detartrage',
-      'Time & Date': '10:29 AM | 22/04/2024',
-      Status: 'Canceled',
-    },
-  ];
+  appointmentsStore = inject(AppointmentsStore);
 }

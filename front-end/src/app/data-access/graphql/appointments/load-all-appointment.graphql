@@ -1,0 +1,27 @@
+query loadAllAppointments{
+    loadAllAppointments{
+        updatedBy{
+            id
+            username
+        }
+        id
+        updatedAt
+        createdAt
+        createdBy{
+            id
+            username
+        }
+        patient{
+            fullName
+            id
+        }
+        notes
+        status
+        startTime
+        date
+        treatment{
+            name
+            id
+        }
+    }
+}

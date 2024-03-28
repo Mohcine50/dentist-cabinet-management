@@ -1,19 +1,22 @@
 import { signalStore, withMethods, withState, patchState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { StaffService } from '../../services/staff/staff.service';
+import { withAddAppointment } from './features/add-appointment.feature';
+import { withLoadAllAppointment } from './features/load-all-appointment';
 
 interface AppointmentsState {
-  staff: any[];
+  appointments: any[];
   loading: boolean;
 }
 
 const initialState: AppointmentsState = {
-  staff: [],
+  appointments: [],
   loading: false,
 };
 
 export const AppointmentsStore = signalStore(
   { providedIn: 'root' },
-  withMethods((state, staffService = inject(StaffService)) => ({})),
+  withAddAppointment(),
+  withLoadAllAppointment(),
   withState(initialState)
 );

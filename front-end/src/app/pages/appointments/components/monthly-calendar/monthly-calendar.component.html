@@ -25,9 +25,14 @@
 
   @for (day of monthDays; let i = $index; track i) {
     <div
-      class="h-28 border-[#CEE7F8] border flex items-center justify-center text-[0.86rem] font-medium text-[0.87] text-gray-800"
-      [ngClass]="{'!text-gray-400': !isThisMonth(day), 'bg-red-200': isToday(day)}">
-      <span>{{ day | date: "dd" }} </span>
+      class="h-28 border-[#CEE7F8] border flex flex-col items-center justify-center text-[0.86rem] font-medium text-gray-800 gap-1"
+      [ngClass]="{'!text-gray-400': !isThisMonth(day)}">
+      <span>{{ day | date: 'dd' }} </span>
+      @for (appointment of byDayAppointment(day); track appointment) {
+
+        <span class="rounded-full bg-red-200 px-1.5 py-1 text-center text-[0.84rem]"
+              [ngClass]="{'!bg-gray-300': !isThisMonth(day), '!bg-green-300': isToday(day)}">{{ appointment['patient']['fullName'] }} </span>
+      }
     </div>
   }
 </div>
