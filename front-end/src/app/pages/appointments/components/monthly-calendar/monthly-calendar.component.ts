@@ -42,7 +42,6 @@ export class MonthlyCalendarComponent implements OnInit {
     format(addDays(this.firstDayOfWeek, i), 'EEEE')
   );
   appointmentsStore = inject(AppointmentsStore);
-  appointments = this.appointmentsStore.appointments();
   protected readonly isToday = isToday;
   protected readonly isThisMonth = isThisMonth;
 
@@ -72,9 +71,9 @@ export class MonthlyCalendarComponent implements OnInit {
   }
 
   byDayAppointment(day: any) {
-    return this.appointments.filter((appointment) =>
-      isSameDay(day, appointment['date'])
-    );
+    return this.appointmentsStore
+      .appointments()
+      .filter((appointment) => isSameDay(day, appointment['date']));
   }
 
   ngOnInit(): void {}

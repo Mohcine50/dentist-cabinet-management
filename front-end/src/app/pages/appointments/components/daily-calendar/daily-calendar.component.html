@@ -17,18 +17,21 @@
 <div class="flex gap-3.5">
   <div>
     @for (time of hoursOfDay; let i = $index; track i) {
-      <div class="h-28 flex items-center justify-center text-[0.86rem] text-gray-800 font-medium">
+      <div class="h-24 flex items-center justify-center text-[0.86rem] text-gray-800 font-medium">
         <time>{{ time | date:'hh:mm a' }}</time>
       </div>
     }
   </div>
-  <div class="grid grid-cols-1 border-collapse border-spacing-0 grow rounded-md overflow-hidden ring-1">
+  <div class="grid grid-cols-1 border-collapse border-spacing-0 grow rounded-md overflow-hidden ring-1 ring-gray-200">
     @for (time of hoursOfDay; let i = $index; track i) {
       <div>
         <div
-          class="py-1 h-28 border-[#CEE7F8] border font-medium text-[0.86rem] text-gray-800 border-l-0 border-r-0"
+          class="p-1 h-24 border-gray-200 border font-medium text-[0.86rem] text-gray-800 border-l-0 border-r-0"
         >
-          <time>{{ time | date:'hh:mm a' }}</time>
+          @for (appointment of byTimeAppointment(time); track appointment) {
+            <span class="rounded-full bg-red-200 px-1.5 py-1 text-center text-[0.84rem] block"
+                  [ngClass]="{'!bg-gray-300': !isThisMonth(time), '!bg-green-300': isToday(time)}">{{ appointment['patient']['fullName'] }} </span>
+          }
         </div>
       </div>
     }

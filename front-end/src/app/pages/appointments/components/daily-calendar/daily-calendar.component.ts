@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   eachMinuteOfInterval,
@@ -7,7 +7,10 @@ import {
   isToday,
   sub,
   add,
+  parseISO,
+  isThisMonth,
 } from 'date-fns';
+import { AppointmentsStore } from '../../../../stores/appointments/appointments.store';
 
 @Component({
   selector: 'dem-daily-calendar',
@@ -18,8 +21,9 @@ import {
 })
 export class DailyCalendarComponent implements OnInit {
   todayDate = startOfToday();
-
+  appointmentsStore = inject(AppointmentsStore);
   protected readonly isToday = isToday;
+  protected readonly isThisMonth = isThisMonth;
 
   get selectedDay() {
     return this.todayDate;
@@ -41,6 +45,23 @@ export class DailyCalendarComponent implements OnInit {
           end: this.selectedDay.setHours(13),
         })
     );
+  }
+
+  byTimeAppointment(time: Date) {
+    return this.appointmentsStore.appointments().filter((appointment) => {
+      const appointDate = appointment.date;
+      const appointTime = appointment.startTime;
+
+      const [hours, minutes] = appointTime.split(':');
+      const date = parseISO(appointDate);
+      date.setHours(hours);
+      date.setMinutes(minutes);
+
+      return isWithinInterval(date, {
+        start: add(time, { minutes: -1 }),
+        end: add(time, { minutes: 14 }),
+      });
+    });
   }
 
   previousDay() {

@@ -1,21 +1,21 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   add,
   eachDayOfInterval,
   eachMinuteOfInterval,
-  endOfMonth,
   endOfWeek,
   format,
   isSameMonth,
   isThisMonth,
   isToday,
   isWithinInterval,
-  parse,
+  parseISO,
   startOfToday,
   startOfWeek,
   sub,
 } from 'date-fns';
+import { AppointmentsStore } from '../../../../stores/appointments/appointments.store';
 
 @Component({
   selector: 'dem-weekly-calendar',
@@ -27,8 +27,9 @@ import {
 export class WeeklyCalendarComponent implements OnInit {
   todayDate = startOfToday();
   firstDayOfWeek = startOfWeek(this.todayDate, { weekStartsOn: 1 });
-
+  appointmentsStore = inject(AppointmentsStore);
   protected readonly isToday = isToday;
+  protected readonly isThisMonth = isThisMonth;
 
   get hoursOfDay() {
     return eachMinuteOfInterval(
@@ -82,13 +83,28 @@ export class WeeklyCalendarComponent implements OnInit {
   }
 
   previousWeek() {
-    const previousWeek = sub(this.firstDayOfWeek, { weeks: 1 });
-    this.firstDayOfWeek = previousWeek;
+    this.firstDayOfWeek = sub(this.firstDayOfWeek, { weeks: 1 });
   }
 
   nextWeek() {
-    const nextWeek = add(this.firstDayOfWeek, { weeks: 1 });
-    this.firstDayOfWeek = nextWeek;
+    this.firstDayOfWeek = add(this.firstDayOfWeek, { weeks: 1 });
+  }
+
+  byTimeAppointment(time: Date) {
+    return this.appointmentsStore.appointments().filter((appointment) => {
+      const appointDate = appointment.date;
+      const appointTime = appointment.startTime;
+
+      const [hours, minutes] = appointTime.split(':');
+      const date = parseISO(appointDate);
+      date.setHours(hours);
+      date.setMinutes(minutes);
+
+      return isWithinInterval(date, {
+        start: add(time, { minutes: -1 }),
+        end: add(time, { minutes: 14 }),
+      });
+    });
   }
 
   ngOnInit(): void {}

@@ -36,9 +36,14 @@
         <div class="grid grid-flow-row">
           @for (time of generateTimesFromDayTime(day); let i = $index; track i; ) {
             <div
-              class="h-28 border-gray-300 border flex items-center justify-center text-[0.86rem] font-medium text-[0.87] text-gray-800"
+              class="h-28 border-gray-300 border flex items-center justify-center text-[0.86rem] font-medium text-gray-800"
             >
               <time [dateTime]="time">{{ time | date:'hh:mm a' }}</time>
+              @for (appointment of byTimeAppointment(time); track appointment) {
+
+                <span class="rounded-full bg-red-200 px-1.5 py-1 text-center text-[0.84rem]"
+                      [ngClass]="{'!bg-gray-300': !isThisMonth(day), '!bg-green-300': isToday(day)}">{{ appointment['patient']['fullName'] }} </span>
+              }
             </div>
           }
         </div>
