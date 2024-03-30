@@ -6,7 +6,7 @@ import { AppointmentsService } from '../../../services/appointments/appointments
 export function withLoadAllAppointment() {
   return signalStoreFeature(
     withMethods((state, appointmentService = inject(AppointmentsService)) => ({
-      loadAllAllAppointments() {
+      loadAllAppointments() {
         appointmentService.loadAllAppointment().subscribe((appointments) => {
           patchState(state, { appointments });
         });

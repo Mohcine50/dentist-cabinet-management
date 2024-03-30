@@ -15,6 +15,7 @@ import { AddTreatmentComponent } from '../treatments/addTreatment/add-treatment.
 import { RightSliderComponent } from '../../shared/components/rightSlider/rightSlider.component';
 import { AddAppointmentComponent } from './components/add-appointment/add-appointment.component';
 import { AppointmentsStore } from '../../stores/appointments/appointments.store';
+import { isToday, startOfToday } from 'date-fns';
 
 @Component({
   selector: 'dem-appointment',
@@ -43,13 +44,30 @@ export class AppointmentComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {}
 
+  get upcomingAppointments() {
+    const todayAppointments = this.appointmentsStore
+      .appointments()
+      .filter((appointment) => isToday(appointment.date));
+
+    return todayAppointments
+      .sort((a, b) => this.getDate(a).getTime() - this.getDate(b).getTime())
+      .slice(0, 5);
+  }
+
+  getDate(app: any) {
+    const date = new Date();
+    const [hours, minutes] = app.startTime.split(':');
+    date.setHours(hours);
+    date.setMinutes(minutes);
+    return date;
+  }
+
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((value) => {
       this.view = value.get('view');
     });
 
-    this.appointmentsStore.loadAllAllAppointments();
-    console.log(this.appointmentsStore.appointments());
+    this.appointmentsStore.loadAllAppointments();
   }
 
   addAppointment() {
