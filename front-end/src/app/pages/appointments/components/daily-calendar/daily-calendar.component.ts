@@ -9,6 +9,7 @@ import {
   add,
   parseISO,
   isThisMonth,
+  format,
 } from 'date-fns';
 import { AppointmentsStore } from '../../../../stores/appointments/appointments.store';
 
@@ -75,4 +76,39 @@ export class DailyCalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  onDragLeave(e: Event) {
+    const draggableItem = e.target as HTMLElement;
+    draggableItem.style.background = '';
+  }
+
+  onDragOver(e: Event) {
+    e.preventDefault();
+    const draggableItem = e.target as HTMLElement;
+    draggableItem.style.borderStyle = 'dashed';
+    draggableItem.style.borderWidth = '2px';
+    draggableItem.style.borderColor = 'blue';
+    draggableItem.style.background = 'lightgray';
+  }
+
+  onDrop(e: any, time: Date) {
+    e.preventDefault();
+    const id = e.dataTransfer.getData('appointment_id');
+    const appointment = this.appointmentsStore
+      .appointments()
+      .find((app) => app.id === id);
+    e.target.style.background = '';
+    appointment.startTime = format(time, 'hh:mm');
+  }
+
+  onDragStart(e: any, id: string) {
+    const draggableItem = e.target as HTMLElement;
+    draggableItem.style.transform = 'rotate(5deg)';
+    e.dataTransfer.setData('appointment_id', id);
+  }
+
+  onDragEnd(e: Event) {
+    const draggableItem = e.target as HTMLElement;
+    draggableItem.style.transform = '';
+  }
 }
