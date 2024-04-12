@@ -1,55 +1,89 @@
 <div class="flex gap-4 items-center text-[0.87rem]">
-  <button class="dem-btn "><a [queryParams]="{view:'list',filter: 'all'}"
-                              [routerLink]="['/appointments-management']">All</a>
+  <button
+    class="dem-btn"
+    [ngClass]="{
+      '!bg-[#EEF8FA] !text-main-blue': filter !== 'all' && filter !== null
+    }"
+  >
+    <a
+      [queryParams]="{ view: 'list', filter: 'all' }"
+      [routerLink]="['/appointments-management']"
+      >All</a
+    >
   </button>
-  <button class="dem-btn !bg-[#EEF8FA] !text-main-blue"><a [queryParams]="{view:'list',filter: 'upcoming'}"
-                                                           [routerLink]="['/appointments-management']">Upcoming</a>
+  <button
+    class="dem-btn"
+    [ngClass]="{ '!bg-[#EEF8FA] !text-main-blue': filter !== 'upcoming' }"
+  >
+    <a
+      [queryParams]="{ view: 'list', filter: 'upcoming' }"
+      [routerLink]="['/appointments-management']"
+      >Upcoming</a
+    >
   </button>
-  <button class="dem-btn !bg-[#EEF8FA] !text-main-blue"><a [queryParams]="{view:'list',filter: 'expired'}"
-                                                           [routerLink]="['/appointments-management']">Expired</a>
+  <button
+    class="dem-btn"
+    [ngClass]="{ '!bg-[#EEF8FA] !text-main-blue': filter !== 'expired' }"
+  >
+    <a
+      [queryParams]="{ view: 'list', filter: 'expired' }"
+      [routerLink]="['/appointments-management']"
+      >Expired</a
+    >
   </button>
-  <button class="dem-btn !bg-[#EEF8FA] !text-main-blue"><a [queryParams]="{view:'list',filter: 'canceled'}"
-                                                           [routerLink]="['/appointments-management']">Canceled</a>
+  <button
+    class="dem-btn"
+    [ngClass]="{ '!bg-[#EEF8FA] !text-main-blue': filter !== 'canceled' }"
+  >
+    <a
+      [queryParams]="{ view: 'list', filter: 'canceled' }"
+      [routerLink]="['/appointments-management']"
+      >Canceled</a
+    >
   </button>
 </div>
 
 <table>
   <thead>
-  <tr>
-    @for (header of patientTableHeader; let i = $index; track i) {
+    <tr>
+      @for (header of patientTableHeader; let i = $index; track i) {
       <th class="">{{ header }}</th>
-    }
-    <th class="!max-w-10"></th>
-  </tr>
+      }
+      <th class="!max-w-10"></th>
+    </tr>
   </thead>
   <tbody>
-    @if (appointmentsStore.appointments()) {
-      @for (appointment of appointmentsStore.appointments(); let i = $index; track i) {
-        <tr>
-          <td>
-            <div class="flex items-center gap-2">
-              <img
-                [src]="'https://api.dicebear.com/8.x/initials/svg?radius=50&size=32&fontSize=44&seed=' + appointment['patient']['fullName']"
-                alt="avatar"
-              />
-              <h4>{{ appointment['patient']['fullName'] }}</h4>
-            </div>
-          </td>
-          <td>{{ appointment['treatment']['name'] }}</td>
-          <td>{{ appointment['startTime'] }} | {{ appointment['date'] | date: 'EEEE dd, YYYY' }}</td>
-          <td>{{ appointment['status'] }}</td>
+    @if (appointments) { @for (appointment of appointments; let i = $index;
+    track i) {
+    <tr>
+      <td>
+        <div class="flex items-center gap-2">
+          <img
+            [src]="
+              'https://api.dicebear.com/8.x/initials/svg?radius=50&size=32&fontSize=44&seed=' +
+              appointment['patient']['fullName']
+            "
+            alt="avatar"
+          />
+          <h4>{{ appointment['patient']['fullName'] }}</h4>
+        </div>
+      </td>
+      <td>{{ appointment['treatment']['name'] }}</td>
+      <td>
+        {{ appointment['startTime'] }} |
+        {{ appointment['date'] | date : 'EEEE dd, YYYY' }}
+      </td>
+      <td>{{ appointment['status'] }}</td>
 
-          <td class="flex gap-4 items-center justify-end">
-            <span
-              class="!text-main-green  font-medium cursor-pointer inline-block">View</span>
-            <span
-              class="!text-main-blue  font-medium cursor-pointer inline-block">Edit</span>
-          </td>
-
-
-        </tr>
-      }
-    }
-
+      <td class="flex gap-4 items-center justify-end">
+        <span class="!text-main-green font-medium cursor-pointer inline-block"
+          >View</span
+        >
+        <span class="!text-main-blue font-medium cursor-pointer inline-block"
+          >Edit</span
+        >
+      </td>
+    </tr>
+    } }
   </tbody>
 </table>
