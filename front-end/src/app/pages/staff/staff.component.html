@@ -1,43 +1,59 @@
 <div class="flex items-center justify-between">
-  <h2 class="text-base">Staff Members</h2>
+  <h2 class="text-base">Team Members</h2>
   <div class="flex items-center gap-5">
     <div class="flex rounded-md bg-gray-300">
-      <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['bg-white','rounded-md','shadow-md']"
-         [routerLink]="['/staff']"
-         class="p-1.5 text-gray-600"
+      <a
+        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLinkActive]="['bg-white', 'rounded-md', 'shadow-md']"
+        [routerLink]="['/team-members']"
+        class="p-1.5 text-gray-600"
       >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-             xmlns="http://www.w3.org/2000/svg">
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
             stroke-linecap="round"
-            stroke-linejoin="round" />
+            stroke-linejoin="round"
+          />
         </svg>
       </a>
-      <a [queryParams]="{view:'cards'}"
-         [routerLinkActiveOptions]="{exact: true}"
-         [routerLinkActive]="['bg-white','rounded-md','shadow-md']"
-         [routerLink]="['/staff']"
-         class="p-1.5 text-gray-600"
+      <a
+        [queryParams]="{ view: 'cards' }"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLinkActive]="['bg-white', 'rounded-md', 'shadow-md']"
+        [routerLink]="['/team-members']"
+        class="p-1.5 text-gray-600"
       >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-             xmlns="http://www.w3.org/2000/svg">
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"
             stroke-linecap="round"
-            stroke-linejoin="round" />
+            stroke-linejoin="round"
+          />
         </svg>
-
       </a>
     </div>
-    <button (click)="addStaffForm()" class="dem-btn">Add Staff</button>
+    <button (click)="addStaffForm()" class="dem-btn">New Member</button>
   </div>
 </div>
 
 @if (!showLayout) {
-  <div class="">
-    <table>
-      <thead>
+<div class="">
+  <table>
+    <thead>
       <tr>
         <th class="">Full Name</th>
         <th class="">Contact</th>
@@ -45,72 +61,73 @@
         <th class="">Role</th>
         <th class="!max-w-10"></th>
       </tr>
-      </thead>
-      <tbody>
-        @if (staffStore.staff() && staffStore.staff().length > 0) {
-          @for (staff of staffStore.staff(); let i = $index; track staff.id) {
-            <tr>
-              @if (staff['profile']) {
-                <td>
-                  <div class="flex items-center gap-2">
-                    <img
-                      [src]="'https://api.dicebear.com/8.x/initials/svg?radius=50&size=32&fontSize=44&seed=' + staff['profile']['fullName'] "
-                      alt="avatar"
-                    />
-                    <h4>{{ staff['profile']['fullName'] }}</h4>
-                  </div>
-                </td>
+    </thead>
+    <tbody>
+      @if (staffStore.staff() && staffStore.staff().length > 0) { @for (staff of
+      staffStore.staff(); let i = $index; track staff.id) {
+      <tr>
+        @if (staff['profile']) {
+        <td>
+          <div class="flex items-center gap-2">
+            <img
+              [src]="
+                'https://api.dicebear.com/8.x/initials/svg?radius=50&size=32&fontSize=44&seed=' +
+                staff['profile']['fullName']
+              "
+              alt="avatar"
+            />
+            <h4>{{ staff['profile']['fullName'] }}</h4>
+          </div>
+        </td>
 
-                <td class="flex flex-col gap-1.5">
-              <span
-                class="inline-block">{{ staff['profile']['email'] }}</span>
-                  <span
-                    class="inline-block">{{ staff['profile']['phoneNumber'] }}</span>
-                </td>
-              }
-              <td>{{ staff['username'] }}</td>
-              @if (staff['roles'].length > 0) {
-                <td>{{ staff['roles'][0]['name'] }}</td>
-              }
-
-              <td class="flex gap-4 items-center justify-end h-full">
-            <span
-              class="!text-main-green  font-medium cursor-pointer block">View</span>
-                <span
-                  class="!text-main-blue  font-medium cursor-pointer block">Edit</span>
-              </td>
-            </tr>
-          }
+        <td class="flex flex-col gap-1.5">
+          <span class="inline-block">{{ staff['profile']['email'] }}</span>
+          <span class="inline-block">{{
+            staff['profile']['phoneNumber']
+          }}</span>
+        </td>
         }
-      </tbody>
-      @if (staffStore.staff().length === 0) {
-        <tfoot>
-        <tr class="bg-white py-4">
-          <td class="w-full text-center font-medium text-gray-600 text-sm py-4" [colSpan]="5">
-            You don't have any staff members
-          </td>
-        </tr>
-        </tfoot>
-      }
-    </table>
-  </div>
+        <td>{{ staff['username'] }}</td>
+        @if (staff['roles'].length > 0) {
+        <td>{{ staff['roles'][0]['name'] }}</td>
+        }
+
+        <td class="flex gap-4 items-center justify-end h-full">
+          <span class="!text-main-green font-medium cursor-pointer block"
+            >View</span
+          >
+          <span class="!text-main-blue font-medium cursor-pointer block"
+            >Edit</span
+          >
+        </td>
+      </tr>
+      } }
+    </tbody>
+    @if (staffStore.staff().length === 0) {
+    <tfoot>
+      <tr class="bg-white py-4">
+        <td
+          class="w-full text-center font-medium text-gray-600 text-sm py-4"
+          [colSpan]="5"
+        >
+          You don't have any staff members
+        </td>
+      </tr>
+    </tfoot>
+    }
+  </table>
+</div>
 
 } @else {
-  <div class="grid grid-cols-5 gap-3">
-    @if (staffStore.staff() && staffStore.staff().length > 0) {
-      @for (staff of staffStore.staff(); let i = $index; track staff.id) {
-        <dem-staff-card [staff]="staff" />
-      }
-    } @else {
-      <p>No staff to show</p>
-    }
-
-  </div>
+<div class="grid grid-cols-5 gap-3">
+  @if (staffStore.staff() && staffStore.staff().length > 0) { @for (staff of
+  staffStore.staff(); let i = $index; track staff.id) {
+  <dem-staff-card [staff]="staff" />
+  } } @else {
+  <p>No member to show</p>
+  }
+</div>
 }
-
-
-
-
 
 <dem-right-slider #rightSliderComponent title="Add Staff">
   <dem-add-staff (event)="addStaffForm()" />

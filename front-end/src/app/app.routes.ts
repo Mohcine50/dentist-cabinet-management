@@ -52,7 +52,7 @@ export const appRoutes: Route[] = [
           ),
       },
       {
-        path: 'staff',
+        path: 'team-members',
         loadComponent: () =>
           import('./pages/staff/staff.component').then((c) => c.StaffComponent),
       },
