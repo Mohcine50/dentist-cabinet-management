@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Inter", sans-serif;
+  }
+}
+
+.dem-btn {
+  @apply py-2 px-3.5 bg-main-blue capitalize rounded text-white text-[0.9] font-normal;
+}
+
+.dem-btn-trp {
+  @apply bg-white ring-1 ring-gray-300 text-black;
+}
+
+.dem-input {
+  @apply outline-main-blue outline-[0.8px] ring-1 ring-gray-200 ring-inset shadow-sm ring-offset-0 py-2 px-1.5 rounded-md block text-[0.9rem] w-full;
+}
+
+
+table {
+  @apply min-w-full indent-0 ring-1 border-collapse ring-gray-100 rounded-lg;
+
+  thead {
+    @apply bg-opacity-100 bg-[#F7FBFE];
+
+    th {
+      @apply font-semibold text-sm text-start py-3.5 px-3 border-b  border-gray-300 capitalize;
+    }
+  }
+
+  tbody {
+    @apply divide-opacity-100 border-gray-200 divide-y text-sm bg-white;
+
+    td {
+      @apply text-nowrap py-4 px-3 capitalize text-gray-400;
+
+      &:first-of-type {
+        @apply text-black;
+      }
+    }
+  }
+}

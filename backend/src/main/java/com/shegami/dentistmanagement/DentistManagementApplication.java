@@ -21,7 +21,7 @@ public class DentistManagementApplication {
 	}
 
 
-	//@Bean()
+	@Bean()
 	CommandLineRunner commandLineRunner(UserService accountService, RolesService rolesService, PasswordEncoder passwordEncoder) {
 
 		return args -> {
