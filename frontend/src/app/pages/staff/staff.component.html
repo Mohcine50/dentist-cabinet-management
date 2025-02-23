@@ -121,11 +121,11 @@
     </div>
 
 } @else {
-    <div class="grid grid-cols-5 gap-3">
+    <div class="grid grid-cols-4 gap-3">
         @if (staffStore.staff() && staffStore.staff().length > 0) {
             @for (staff of
                 staffStore.staff(); let i = $index; track staff.id) {
-                <dem-staff-card [staff]="staff"/>
+                <dem-staff-card [staff]="staff" (show-details)="viewStaffDetails(staff)"/>
             }
         } @else {
             <p>No member to show</p>

@@ -1,60 +1,61 @@
-<div class="relative w-full flex justify-end items-center">
-  <button (click)="toggleMenu()"
-          class="!text-lg !text-gray-600"
-  >...
-  </button>
-  @if (showMenu) {
-    <div class="absolute p-1 ring-1 ring-offset-1 ring-gray-100 top-[100%] right-0 bg-white rounded-sm !text-gray-500">
-      <ul class="flex-col flex gap-0.5 items-start text-[0.8rem]">
-        <li class="hover:bg-gray-100 cursor-pointer w-full py-0.5 px-1">Edit</li>
-        <hr class="opacity-85" />
-        <li class="hover:bg-gray-100 w-full cursor-pointer py-0.5 px-1">Details</li>
-      </ul>
-    </div>
-  }
+<div class="relative w-full  flex justify-end items-center">
+    <button (click)="toggleMenu()"
+            class="!text-lg !text-gray-600"
+    >...
+    </button>
+    @if (showMenu) {
+        <div class="absolute p-1 ring-1 ring-offset-1 ring-gray-100 top-[100%] right-0 bg-white rounded-sm !text-gray-500">
+            <ul class="flex-col flex gap-0.5 items-start text-[0.8rem]">
+                <li class="hover:bg-gray-100 cursor-pointer w-full py-0.5 px-1">Edit</li>
+                <hr class="opacity-85"/>
+                <li class="hover:bg-gray-100 w-full cursor-pointer py-0.5 px-1" (click)="showStaffDetails()">Details
+                </li>
+            </ul>
+        </div>
+    }
 </div>
 <img
-  [src]="'https://api.dicebear.com/8.x/initials/svg?radius=50&size=32&fontSize=44&seed=' + staff.profile.fullName "
-  alt="avatar"
-  width="75"
+        [src]="'https://api.dicebear.com/8.x/initials/svg?radius=50&size=32&fontSize=44&seed=' + staff.profile.fullName "
+        alt="avatar"
+        width="75"
 />
 <div class="flex-col flex items-center">
-  <h4 class="!text-[1.1rem]">{{ staff.profile.fullName | titlecase }} </h4>
-  <h3 class="!text-gray-500">{{ staff.profile.bio }}</h3>
+    <h4 class="!text-[1.1rem]">{{ staff.profile.fullName | titlecase }} </h4>
+    <h3 class="!text-gray-500">{{ staff.profile.bio }}</h3>
 </div>
 
-<div class="py-1.5 bg-[#F7FBFE] bg-opacity-80 ring-1 ring-gray-100 rounded-sm w-full flex flex-col gap-2">
-  <div class="flex px-1.5">
-    <div class="flex-1 flex flex-col gap-1.5">
-      <h3 class="!text-gray-500">Role</h3>
-      <h3>{{ staff.roles[0].name }}</h3>
+<div class="bg-[#F7FBFE] bg-opacity-80 ring-1 ring-gray-100 rounded-md w-full flex flex-col gap-2">
+    <div class="flex p-2">
+        <div class="flex-1 flex flex-col gap-1.5">
+            <h3 class="!text-gray-500">Role</h3>
+            <h3>{{ staff.roles[0].name }}</h3>
+        </div>
+        <div class="flex-1 flex flex-col gap-1.5">
+            <h3 class="!text-gray-500">Date Hired</h3>
+            <h3 class="text-nowrap">{{ staff.profile.createdAt | date : 'MMM dd, yyyy' }}</h3>
+        </div>
     </div>
-    <div class="flex-1 flex flex-col gap-1.5">
-      <h3 class="!text-gray-500">Date Hired</h3>
-      <h3 class="text-nowrap">{{ staff.profile.createdAt | date : 'MMM dd, yyyy' }}</h3>
+    <hr class="opacity-75"/>
+    <div class="flex flex-col gap-2 p-2">
+        <div class="text-nowrap flex items-center gap-2">
+            <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path
+                        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+            </svg>
+            <h3 class="text-center">{{ staff.profile.email }}</h3>
+        </div>
+        <div class="text-nowrap class flex items-center gap-2">
+            <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path
+                        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+            </svg>
+            <h3 class="text-center">{{ staff.profile.phoneNumber }}</h3>
+        </div>
     </div>
-  </div>
-  <hr class="opacity-75" />
-  <div class="flex flex-col gap-1.5 px-1.5">
-    <div class="text-nowrap flex items-center gap-2">
-      <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-           xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
-          stroke-linecap="round"
-          stroke-linejoin="round" />
-      </svg>
-      <h3 class="text-center">{{ staff.profile.email }}</h3>
-    </div>
-    <div class="text-nowrap class flex items-center gap-2">
-      <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-           xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
-          stroke-linecap="round"
-          stroke-linejoin="round" />
-      </svg>
-      <h3 class="text-center">{{ staff.profile.phoneNumber }}</h3>
-    </div>
-  </div>
 </div>
