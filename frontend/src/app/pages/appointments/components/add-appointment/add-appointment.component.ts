@@ -1,22 +1,22 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, inject, OnInit, Output } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
-} from '@angular/forms';
-import { TreatmentsStore } from '../../../../stores/treatments/treatments.store';
-import { SingleSelectInputComponent } from '../../../../shared/components/singleSelectInput/single-select-input.component';
-import { PatientsStore } from '../../../../stores/patients/patients.store';
-import { AppointmentsStore } from '../../../../stores/appointments/appointments.store';
+} from "@angular/forms";
+import { TreatmentsStore } from "../../../../stores/treatments/treatments.store";
+import { SingleSelectInputComponent } from "../../../../shared/components/single-select-input/single-select-input.component";
+import { PatientsStore } from "../../../../stores/patients/patients.store";
+import { AppointmentsStore } from "../../../../stores/appointments/appointments.store";
 
 @Component({
-  selector: 'dem-add-appointment',
+  selector: "dem-add-appointment",
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, SingleSelectInputComponent],
-  templateUrl: './add-appointment.component.html',
-  styleUrl: './add-appointment.component.scss',
+  templateUrl: "./add-appointment.component.html",
+  styleUrl: "./add-appointment.component.scss",
 })
 export class AddAppointmentComponent implements OnInit {
   @Output() event = new EventEmitter<void>();
@@ -25,12 +25,12 @@ export class AddAppointmentComponent implements OnInit {
   patientsStore = inject(PatientsStore);
   appointmentsStore = inject(AppointmentsStore);
   protected appointmentForm!: FormGroup;
-  protected startTime = new FormControl('', [Validators.required]);
-  protected date = new FormControl('', [Validators.required]);
-  protected status = new FormControl('', [Validators.required]);
-  protected notes = new FormControl('', [Validators.required]);
-  protected treatment = new FormControl('', [Validators.required]);
-  protected patient = new FormControl('', [Validators.required]);
+  protected startTime = new FormControl("", [Validators.required]);
+  protected date = new FormControl("", [Validators.required]);
+  protected status = new FormControl("", [Validators.required]);
+  protected notes = new FormControl("", [Validators.required]);
+  protected treatment = new FormControl("", [Validators.required]);
+  protected patient = new FormControl("", [Validators.required]);
 
   ngOnInit(): void {
     this.appointmentForm = new FormGroup({

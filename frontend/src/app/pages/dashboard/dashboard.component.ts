@@ -1,12 +1,12 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { StatisticsCardComponent } from './components/statistics-card/statistics-card.component';
-import { PatientsDemographicsComponent } from './components/patients-demographics/patients-demographics.component';
-import {SideBarComponent} from "../../shared/components/sideBar/sideBar.component";
+import { CommonModule } from "@angular/common";
+import { Component } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { StatisticsCardComponent } from "./components/statistics-card/statistics-card.component";
+import { PatientsDemographicsComponent } from "./components/patients-demographics/patients-demographics.component";
+import { SideBarComponent } from "../../shared/components/side-bar/sideBar.component";
 
 @Component({
-  selector: 'dem-dashboard',
+  selector: "dem-dashboard",
   standalone: true,
   imports: [
     CommonModule,
@@ -15,7 +15,7 @@ import {SideBarComponent} from "../../shared/components/sideBar/sideBar.componen
     StatisticsCardComponent,
     PatientsDemographicsComponent,
   ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+  templateUrl: "./dashboard.component.html",
+  styleUrl: "./dashboard.component.scss",
 })
 export class DashboardComponent {}

@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SearchInputComponent } from '../searchInput/searchInput.component';
+import { Component } from "@angular/core";
+import { CommonModule, NgOptimizedImage } from "@angular/common";
+import { FormControl, ReactiveFormsModule, Validators } from "@angular/forms";
+import { SearchInputComponent } from "../search-input/searchInput.component";
 
 @Component({
-  selector: 'dem-header',
+  selector: "dem-header",
   standalone: true,
   imports: [
     CommonModule,
@@ -12,7 +12,7 @@ import { SearchInputComponent } from '../searchInput/searchInput.component';
     ReactiveFormsModule,
     SearchInputComponent,
   ],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  templateUrl: "./header.component.html",
+  styleUrl: "./header.component.scss",
 })
 export class HeaderComponent {}

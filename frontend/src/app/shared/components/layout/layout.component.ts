@@ -1,12 +1,12 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { HeaderComponent } from '../header/header.component';
-import { RightSliderComponent } from '../rightSlider/rightSlider.component';
-import { SideBarComponent } from '../sideBar/sideBar.component';
+import { CommonModule } from "@angular/common";
+import { Component } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { HeaderComponent } from "../header/header.component";
+import { RightSliderComponent } from "../right-slider/rightSlider.component";
+import { SideBarComponent } from "../side-bar/sideBar.component";
 
 @Component({
-  selector: 'dem-layout',
+  selector: "dem-layout",
   standalone: true,
   imports: [
     CommonModule,
@@ -15,7 +15,7 @@ import { SideBarComponent } from '../sideBar/sideBar.component';
     HeaderComponent,
     RightSliderComponent,
   ],
-  templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss',
+  templateUrl: "./layout.component.html",
+  styleUrl: "./layout.component.scss",
 })
 export class LayoutComponent {}

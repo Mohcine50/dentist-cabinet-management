@@ -6,23 +6,23 @@ import {
   Input,
   OnInit,
   Output,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
+} from "@angular/core";
+import { CommonModule } from "@angular/common";
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
-} from '@angular/forms';
-import { RolesStore } from '../../../stores/roles/roles.store';
-import { getState } from '@ngrx/signals';
-import { DemLoadAllRolesQuery } from '../../../data-access/generated/generated';
-import { MultiSelectInputComponent } from '../../../shared/components/multiSelectInput/multi-select-input.component';
-import { SingleSelectInputComponent } from '../../../shared/components/singleSelectInput/single-select-input.component';
-import { StaffStore } from '../../../stores/staff/staff.store';
+} from "@angular/forms";
+import { RolesStore } from "../../../stores/roles/roles.store";
+import { getState } from "@ngrx/signals";
+import { DemLoadAllRolesQuery } from "../../../data-access/generated/generated";
+import { MultiSelectInputComponent } from "../../../shared/components/multi-select-input/multi-select-input.component";
+import { SingleSelectInputComponent } from "../../../shared/components/single-select-input/single-select-input.component";
+import { StaffStore } from "../../../stores/staff/staff.store";
 
 @Component({
-  selector: 'dem-add-staff',
+  selector: "dem-add-staff",
   providers: [RolesStore],
   standalone: true,
   imports: [
@@ -31,8 +31,8 @@ import { StaffStore } from '../../../stores/staff/staff.store';
     MultiSelectInputComponent,
     SingleSelectInputComponent,
   ],
-  templateUrl: './add-staff.component.html',
-  styleUrl: './add-staff.component.scss',
+  templateUrl: "./add-staff.component.html",
+  styleUrl: "./add-staff.component.scss",
 })
 export class AddStaffComponent implements OnInit {
   readonly rolesStore = inject(RolesStore);
@@ -41,17 +41,17 @@ export class AddStaffComponent implements OnInit {
   @Output() event = new EventEmitter<void>();
   selectedOptions: any;
   protected staffForm!: FormGroup;
-  protected fullName = new FormControl('', [Validators.required]);
-  protected username = new FormControl('', [Validators.required]);
-  protected bio = new FormControl('', [Validators.required]);
-  protected phoneNumber = new FormControl('', [Validators.required]);
-  protected gender = new FormControl('', [Validators.required]);
-  protected address = new FormControl('', [Validators.required]);
-  protected city = new FormControl('', [Validators.required]);
-  protected otherPhoneNumber = new FormControl('', [Validators.required]);
-  protected cinNumber = new FormControl('', [Validators.required]);
-  protected email = new FormControl('', [Validators.required]);
-  protected role = new FormControl('', [Validators.required]);
+  protected fullName = new FormControl("", [Validators.required]);
+  protected username = new FormControl("", [Validators.required]);
+  protected bio = new FormControl("", [Validators.required]);
+  protected phoneNumber = new FormControl("", [Validators.required]);
+  protected gender = new FormControl("", [Validators.required]);
+  protected address = new FormControl("", [Validators.required]);
+  protected city = new FormControl("", [Validators.required]);
+  protected otherPhoneNumber = new FormControl("", [Validators.required]);
+  protected cinNumber = new FormControl("", [Validators.required]);
+  protected email = new FormControl("", [Validators.required]);
+  protected role = new FormControl("", [Validators.required]);
 
   constructor() {
     effect(() => {
@@ -59,7 +59,7 @@ export class AddStaffComponent implements OnInit {
     });
   }
 
-  get rolesList(): DemLoadAllRolesQuery['loadAllRoles'] {
+  get rolesList(): DemLoadAllRolesQuery["loadAllRoles"] {
     return this.rolesStore.roles();
   }
 

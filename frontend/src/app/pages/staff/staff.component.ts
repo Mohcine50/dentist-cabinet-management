@@ -1,12 +1,12 @@
 import { Component, effect, inject, OnInit, ViewChild } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { RightSliderComponent } from "../../shared/components/rightSlider/rightSlider.component";
+import { RightSliderComponent } from "../../shared/components/right-slider/rightSlider.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AddTreatmentComponent } from "../treatments/addTreatment/add-treatment.component";
 import { StaffStore } from "../../stores/staff/staff.store";
 import { getState } from "@ngrx/signals";
 import { AddStaffComponent } from "./addStaff/add-staff.component";
-import { DataTableComponent } from "../../shared/components/dataTable/data-table.component";
+import { DataTableComponent } from "../../shared/components/data-table/data-table.component";
 import { RolesStore } from "../../stores/roles/roles.store";
 import { StaffCardComponent } from "./staff-card/staff-card.component";
 import {
