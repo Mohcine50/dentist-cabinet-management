@@ -1,0 +1,88 @@
+<div>
+    <div class="grid grid-cols-[1fr_3fr] bg-main-bg p-7">
+        <div>
+            <img [src]="
+                'https://api.dicebear.com/8.x/initials/svg?radius=50&size=80&fontSize=44&seed=' +
+                selectedStaff.profile?.fullName
+              "
+                 alt="avatar"
+            />
+        </div>
+        <div class="flex flex-col gap-2">
+            <h1>{{ selectedStaff.profile?.fullName }}</h1>
+            <p class="text-xs text-gray-400">{{ selectedStaff.profile?.bio }}</p>
+            <div class="flex gap-3 items-center">
+                <span class="rounded text-xs bg-green-200 border border-green-600 text-green-600 py-1 px-2">Active</span>
+                <span class="text-xs text-gray-400">{{ selectedStaff.roles ? selectedStaff.roles[0].name : "" }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-4">
+        <h1 class="px-8 mb-4">Personal Information</h1>
+        <div class="h-[1px] w-full bg-gray-100"></div>
+
+        <div class="grid grid-cols-2 px-7 mt-4">
+            <div class="flex flex-col gap-2">
+                <div>
+                    <h2 class="text-gray-400 text-sm">Full Name</h2>
+                    <h2 class="text-xs">{{ selectedStaff.profile?.fullName }}</h2>
+                </div>
+
+                <div>
+                    <h2 class="text-gray-400 text-sm">CIN</h2>
+                    <h2 class="text-xs">{{ selectedStaff.profile?.cin }}</h2>
+                </div>
+
+                <div>
+                    <h2 class="text-gray-400 text-sm">Address</h2>
+                    <h2 class="text-xs">{{ selectedStaff.profile?.city }} - Morocco</h2>
+                </div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <div>
+                    <h2 class="text-gray-400 text-sm">E-mail</h2>
+                    <h2 class="text-xs">{{ selectedStaff.profile?.email }}</h2>
+                </div>
+                <div>
+                    <h2 class="text-gray-400 text-sm">Phone Number</h2>
+                    <h2 class="text-xs">{{ selectedStaff.profile?.phoneNumber }}</h2>
+                </div>
+                <div>
+                    <h2 class="text-gray-400 text-sm">Other Phone Number</h2>
+                    <h2 class="text-xs">{{ selectedStaff.profile?.phoneNumber && "-" }}</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="m-4">
+        <h1 class="px-8 mb-4">Professional Information</h1>
+        <div class="h-[1px] w-full bg-gray-100"></div>
+
+        <div class="grid grid-cols-2 px-7 mt-4">
+            <div class="flex flex-col gap-2">
+                <div>
+                    <h2 class="text-gray-400 text-sm">Role</h2>
+                    <h2 class="text-xs">{{ selectedStaff.roles ? selectedStaff.roles[0].name : " - " }}</h2>
+                </div>
+
+                <div>
+                    <h2 class="text-gray-400 text-sm">Status</h2>
+                    <!-- TODO: Need to implement status -->
+                    <h2 class="text-xs">Active</h2>
+                </div>
+
+            </div>
+            <div class="flex flex-col gap-2">
+                <div>
+                    <h2 class="text-gray-400 text-sm">Joined At</h2>
+                    <h2 class="text-xs">{{ selectedStaff.profile?.createdAt }}</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

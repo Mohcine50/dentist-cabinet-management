@@ -1,22 +1,22 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { animate, style, transition, trigger } from '@angular/animations';
+import { Component, Input } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
-  selector: 'dem-right-slider',
+  selector: "dem-right-slider",
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './rightSlider.component.html',
-  styleUrl: './rightSlider.component.scss',
+  templateUrl: "./rightSlider.component.html",
+  styleUrl: "./rightSlider.component.scss",
   animations: [
-    trigger('slideOver', [
-      transition(':enter', [
-        style({ transform: 'translateX(100%)' }),
-        animate(500, style({ transform: 'translateX(0)' })),
+    trigger("slideOver", [
+      transition(":enter", [
+        style({ transform: "translateX(100%)" }),
+        animate(500, style({ transform: "translateX(0)" })),
       ]),
-      transition(':leave', [
-        style({ transform: 'translateX(0)' }),
-        animate(500, style({ transform: 'translateX(100%)' })),
+      transition(":leave", [
+        style({ transform: "translateX(0)" }),
+        animate(500, style({ transform: "translateX(100%)" })),
       ]),
     ]),
   ],
@@ -24,7 +24,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
 export class RightSliderComponent {
   isSlideOver = false;
   @Input() title!: string;
-  
+  @Input({ alias: "max-width", required: false }) maxWidth: string = "max-w-md";
+
   toggleSlideOver() {
     this.isSlideOver = !this.isSlideOver;
   }

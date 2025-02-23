@@ -14,6 +14,7 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class UserMutation {
     private final PasswordEncoder passwordEncoder;
 
     @MutationMapping
+    @Transactional
     public AppUser addStaffMember(@Argument StaffDto staff){
 
         Profile profile = profileService.createProfile(Profile.builder()
@@ -49,7 +51,7 @@ public class UserMutation {
         }
         Role roleUser = rolesService.getRoleByName(RoleEnum.USER);
 
-        String password = "staff_"+staff.getUsername();
+        String password = "staff_"+ staff.getUsername();
         AppUser appUser = userService.addNewUser(AppUser.builder()
                         .username(staff.getUsername())
                         .roles(new ArrayList<>(List.of(role, roleUser)))
