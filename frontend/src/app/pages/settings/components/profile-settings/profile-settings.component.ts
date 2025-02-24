@@ -11,22 +11,29 @@ import { NgIf, NgOptimizedImage } from "@angular/common";
 @Component({
   selector: "dem-profile-settings",
   standalone: true,
-  imports: [NgIf, NgOptimizedImage, FormsModule, ReactiveFormsModule],
+  imports: [NgIf, FormsModule, ReactiveFormsModule],
   templateUrl: "./profile-settings.component.html",
   styleUrl: "./profile-settings.component.scss",
 })
 export class ProfileSettingsComponent implements OnInit {
-  protected profileForm: FormGroup | undefined;
+  protected profileForm!: FormGroup;
 
-  protected selectedFile: File | undefined;
+  protected selectedFile!: File;
   protected previewUrl: any;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.profileForm = new FormGroup({
+    this.profileForm = new FormGroup<any>({
       fullName: new FormControl("", Validators.required),
       profile: new FormControl(null, Validators.required),
+      cin: new FormControl("", Validators.required),
+      phoneNumber: new FormControl("", Validators.required),
+      email: new FormControl("", Validators.required),
+      city: new FormControl("", Validators.required),
+      street: new FormControl("", Validators.required),
+      zipcode: new FormControl("", Validators.required),
+      bio: new FormControl("", Validators.required),
     });
   }
 

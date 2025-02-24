@@ -1,1 +1,30 @@
-<p>security-settings works!</p>
+<div class="flex items-center justify-between ">
+    <h1 class="font-semibold text-base ml-3">Profile</h1>
+    <div class="flex items-center justify-end gap-3">
+        <button class="dem-btn" type="submit">Save Edits</button>
+        <button class="dem-btn dem-btn-trp" type="reset">Cancel</button>
+    </div>
+</div>
+
+<hr class="my-3">
+
+<form [formGroup]="securityForm" class="flex flex-col gap-3">
+    <div class="grid grid-cols-[2fr_4fr]">
+        <label>Old Password</label>
+        <input class="dem-input" formControlName="oldPassword" name="old-password" placeholder="Old Password"
+               type="password"/>
+    </div>
+
+    <div class="grid grid-cols-[2fr_4fr]">
+        <label>New Password</label>
+        <input class="dem-input" formControlName="NewPassword" name="new-password" placeholder="New Password"
+               type="password"/>
+    </div>
+
+    <div class="grid grid-cols-[2fr_4fr]">
+        <label>Confirm New Password</label>
+        <input class="dem-input" formControlName="confirmNewPassword" name="confirm-new-password"
+               placeholder="Confirm new password"
+               type="password"/>
+    </div>
+</form>

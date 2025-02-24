@@ -1,12 +1,12 @@
 <div class="flex items-center justify-between ">
-    <h1 class="font-semibold text-base ml-3">Profile</h1>
+    <h1 class="font-semibold text-base ml-3">Security</h1>
     <div class="flex items-center justify-end gap-3">
         <button class="dem-btn" type="submit">Save Edits</button>
         <button class="dem-btn dem-btn-trp" type="reset">Cancel</button>
     </div>
 </div>
 <hr class="my-3">
-<form class="flex flex-col gap-4">
+<form [formGroup]="profileForm" class="flex flex-col gap-4">
     <div class="grid grid-cols-[2fr_4fr]">
         <h2>Profile Picture</h2>
         <div class="flex gap-4 items-center">
@@ -14,7 +14,7 @@
                  width="150">
             <div class="flex-1 h-full">
                 <label
-                        class="flex flex-col items-center justify-center w-full min-h-16 h-full py-10 bg-white/70 border border-dashed border-main-blue rounded-lg cursor-pointer   transition"
+                        class="flex flex-col items-center justify-center w-full min-h-16 h-full py-10 bg-main-bg border border-dashed border-main-blue rounded-lg cursor-pointer   transition"
                         for="profile-picture"
                 >
                     <div class="flex gap-2 items-center justify-center">
@@ -34,12 +34,54 @@
         </div>
     </div>
     <div class="grid grid-cols-[2fr_4fr]">
-        <h2>Full Name</h2>
+        <label>Full Name</label>
         <input class="dem-input" formControlName="fullName" name="full-name" type="text"/>
     </div>
     <div class="grid grid-cols-[2fr_4fr]">
-        <h2>Bio Name</h2>
-        <textarea class="dem-input" formControlName="bio" name="bio" rows="5"
-                  type="text"></textarea>
+        <label>Bio</label>
+        <textarea class="dem-input" formControlName="bio" name="bio" placeholder="Enter a bio"
+                  rows="5" type="text"></textarea>
     </div>
+
+    <hr class="my-3">
+
+    <div class="grid grid-cols-[2fr_4fr]">
+        <label>E-mail</label>
+        <input class="dem-input" formControlName="email" name="email" placeholder="E-mail"
+               type="email"/>
+    </div>
+
+    <div class="grid grid-cols-[2fr_4fr]">
+        <label>Phone Number</label>
+        <input class="dem-input" formControlName="phoneNumber" name="phone-number" placeholder="+999999999"
+               type="tel"/>
+    </div>
+
+    <div class="grid grid-cols-[2fr_4fr]">
+        <label>CIN</label>
+        <input class="dem-input" formControlName="cin" name="cin" placeholder="CIN"
+               type="text"/>
+    </div>
+
+    <hr class="my-3">
+
+    <div class="grid grid-cols-[2fr_4fr]">
+        <label>Street</label>
+        <input class="dem-input" formControlName="street" name="street" placeholder="Street"
+               type="text"/>
+    </div>
+
+    <div class="grid grid-cols-[2fr_4fr]">
+        <label>City</label>
+        <input class="dem-input" formControlName="city" name="city" placeholder="City"
+               type="text"/>
+    </div>
+
+    <div class="grid grid-cols-[2fr_4fr]">
+        <label>Zip Code</label>
+        <input class="dem-input" formControlName="zipcode" name="zip-code" placeholder="Zip Code"
+               type="text"/>
+    </div>
+
+
 </form>
