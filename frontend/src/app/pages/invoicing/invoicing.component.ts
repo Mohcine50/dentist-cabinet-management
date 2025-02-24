@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterLink, RouterOutlet } from "@angular/router";
 
 @Component({
-  selector: 'dem-invoicing',
+  selector: "dem-invoicing",
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './invoicing.component.html',
-  styleUrl: './invoicing.component.scss',
+  imports: [CommonModule, RouterLink, RouterOutlet],
+  templateUrl: "./invoicing.component.html",
+  styleUrl: "./invoicing.component.scss",
 })
-export class InvoicingComponent {}
+export class InvoicingComponent {
+  createInvoice() {}
+}

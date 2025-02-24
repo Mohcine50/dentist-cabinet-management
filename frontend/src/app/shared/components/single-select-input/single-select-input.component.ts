@@ -10,17 +10,17 @@ import {
   OnInit,
   Output,
   Renderer2,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Option } from '@angular/cli/src/command-builder/utilities/json-schema';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+} from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Option } from "@angular/cli/src/command-builder/utilities/json-schema";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
-  selector: 'dem-single-select-input',
+  selector: "dem-single-select-input",
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './single-select-input.component.html',
-  styleUrl: './single-select-input.component.scss',
+  templateUrl: "./single-select-input.component.html",
+  styleUrl: "./single-select-input.component.scss",
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -34,16 +34,19 @@ export class SingleSelectInputComponent
 {
   @Input() options: any[] = [];
   selectedValue: string | null = null;
+  showedValue: string | null = null;
   @Input() title!: string;
   @Input() label?: string;
   disabled = false;
   isOpen = false;
   @Input() optionValue?: string;
 
+  @Output() change = new EventEmitter<any>();
+
   constructor(private element: ElementRef, private rendrer: Renderer2) {}
 
   ngAfterViewInit(): void {
-    this.unListen = this.rendrer.listen('document', 'click', (event: Event) => {
+    this.unListen = this.rendrer.listen("document", "click", (event: Event) => {
       if (!this.element.nativeElement.contains(event.target)) {
         if (this.isOpen) {
           this.toggleDropdown();
@@ -52,7 +55,7 @@ export class SingleSelectInputComponent
     });
   }
 
-  onChange: any = () => {};
+  onChange: any = (value: string) => {};
   unListen: any = () => {};
 
   onTouched: any = () => {};
@@ -87,16 +90,24 @@ export class SingleSelectInputComponent
 
   onOptionClick(value: any) {
     let selectedValue;
-    if (this.label && !this.optionValue) selectedValue = value[this.label];
-    if (this.label && this.optionValue) selectedValue = value[this.optionValue];
-    else selectedValue = value;
+    if (this.label && !this.optionValue) {
+      selectedValue = value[this.label];
+      this.showedValue = value[this.label];
+    } else if (this.label && this.optionValue) {
+      selectedValue = value[this.optionValue];
+      this.showedValue = value[this.label];
+    } else {
+      selectedValue = value;
+      this.showedValue = value;
+    }
     this.selectedValue = selectedValue;
     this.onChange(selectedValue);
+    this.change.emit(value);
     this.toggleDropdown();
   }
 
   splitByHyphen(name: string | null | undefined) {
-    return name?.split('_').join(' ');
+    return name?.split("_").join(" ");
   }
 
   isSelected(value: string): boolean {
